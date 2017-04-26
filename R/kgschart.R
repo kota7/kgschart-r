@@ -27,8 +27,23 @@ kgschart <- function(src, ...)
     yaxis <- NULL
     caption <- NULL
   }
-  list(src=x, graph=graph, yaxis=yaxis, caption=caption)
+
+  structure(list(src=x, graph=graph, yaxis=yaxis, caption=caption),
+            class = 'kgschart')
 }
 
 
 
+#' @export
+plot.kgschart <- function(x, y=NULL, ...)
+{
+  caption_grob <- image_plot(x$caption)
+  yaxis_grob <- image_plot(x$yaxis)
+  graph_grob <- image_plot(x$graph)
+  out <- gridExtra::arrangeGrob(
+    yaxis_grob, caption_grob, graph_grob,
+    layout_matrix=matrix(c(1,1,2,3), nrow=2, ncol=2),
+    widths=c(1,12), heights=c(1,18))
+  plot(out)
+  invisible(out)
+}

@@ -20,8 +20,13 @@ rgb_dist <- function(arr, color)
 
 
 
-image_plot <- function(arr)
+image_plot <- function(arr, plot=FALSE)
 {
-  grid::grid.newpage()
-  grid::grid.raster(aperm(arr, c(2,3,1)))
+  out <- grid::rasterGrob(aperm(arr, c(2,3,1)))
+
+  if (plot) {
+    grid::grid.newpage()
+    grid::grid.draw(out)
+  }
+  invisible(out)
 }
