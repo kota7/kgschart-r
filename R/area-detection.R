@@ -7,15 +7,18 @@ detect_graph_area <- function(arr)
   #
   # returns:
   #   vector of size 4
-  #   [1,1,1,1] if a graph is not detected
+  #   [1,0,1,0] if a graph is not detected
 
   thres_dist <- 0.05
   distance <- rgb_dist(arr[,,dim(arr)[3] %/% 2, drop=FALSE],
                        .WHITE)
   white_rows = which(distance < thres_dist)
+  if (length(white_rows) != 2) return(c(1,0,1,0))
 
   distance <- rgb_dist(arr[,dim(arr)[2] %/% 2,, drop=FALSE],
                        .WHITE)
   white_cols = which(distance < thres_dist)
+  if (length(white_cols) != 2) return(c(1,0,1,0))
+
   c(white_rows, white_cols)
 }

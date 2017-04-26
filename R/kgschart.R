@@ -16,7 +16,6 @@ kgschart <- function(src, ...)
   l <- tblr[3]
   r <- tblr[4]
 
-
   # split into parts
   if (b-t >= 0 & r-l >= 0) {
     graph <- x[,(t+1):(b-1),(l+1):(r-1)]
@@ -28,18 +27,35 @@ kgschart <- function(src, ...)
     caption <- NULL
   }
 
+  # ngrids <- get_num_grids(graph)
+  # print(ngrids)
+  #
+  # line_index <- get_line_index(graph)
+  # plot(-line_index, type='l')
+  #
+  # letters <- extract_axis_letters(yaxis)
+  # print(length(letters))
+  # grobs <- lapply(letters, image_plot)
+  # plot(gridExtra::arrangeGrob(grobs=grobs))
+
   structure(list(src=x, graph=graph, yaxis=yaxis, caption=caption),
             class = 'kgschart')
 }
 
 
 
+
+#' Plot Method for kgschart object
+#' @param x object
+#' @param y not in use
+#' @param ... not in use
+#' @return \code{gtable} object
 #' @export
 plot.kgschart <- function(x, y=NULL, ...)
 {
-  caption_grob <- image_plot(x$caption)
-  yaxis_grob <- image_plot(x$yaxis)
-  graph_grob <- image_plot(x$graph)
+  caption_grob <- if (is.null(x$caption)) grid::textGrob('NO CAPTION') else image_plot(x$caption)
+  yaxis_grob <- if (is.null(x$yaxis)) grid::textGrob('NO YAXIS', rot=90) else image_plot(x$yaxis)
+  graph_grob <- if (is.null(x$graph)) grid::textGrob('NO GRAPH') else image_plot(x$graph)
   out <- gridExtra::arrangeGrob(
     yaxis_grob, caption_grob, graph_grob,
     layout_matrix=matrix(c(1,1,2,3), nrow=2, ncol=2),
