@@ -5,6 +5,9 @@ library(gtable)
 library(gridExtra)
 library(ggplot2)
 library(OpenImageR)
+library(magrittr)
+
+set.seed(87)
 
 datadir <- 'train/data/yaxis/'
 X <- dget(file.path(datadir, 'X'))
@@ -64,7 +67,7 @@ generate_augmented_data <- function(
 }
 
 # generate train and test data
-tmp <- generate_augmented_data(1000, X, Y)
+tmp <- generate_augmented_data(10000, X, Y)
 X_tr <- tmp$X
 Y_tr <- tmp$Y
 
@@ -93,20 +96,120 @@ random_plot <- function(X, Y, Y2=NULL)
   plot(out)
 }
 random_plot(X_tr, Y_tr)
+random_plot(X_te, Y_te)
 
 
 
-# function to flatten image data into (N, features)
-flatten <- function(x, ...)
+# create pipeline like object
+OneHot <- function(...)
 {
-  o <- x
-  dim(o) <- c(dim(x)[1], dim(x)[2]*dim(x)[3])
-  o
+  fit <- function(data) {}
+  transform <- function(data)
+  {
+    data$y <- nnet::class.ind(data$y)
+    data
+  }
+  self <- environment()
+  self
 }
 
-# PCA object to extract features
-pca <- prcomp(flatten(X_tr))
+Flatten <- function(...)
+{
+  fit <- function(data) {}
 
+  transform <- function(data)
+  {
+    dim(data$x) <- c(dim(data$x)[1], dim(data$x)[2]*dim(data$x)[3])
+    data
+  }
 
+  self <- environment()
+  self
+}
 
+PCA <- function(n, ...)
+{
+  model <- NULL
+  fit <- function(data)
+  {
+    model <<- prcomp(data$x, ...)
+  }
+
+  transform <- function(data)
+  {
+    data$x <- predict(model, data$x)[, 1:n]
+    data
+  }
+
+  self <- environment()
+  self
+}
+
+MLP <- function(...)
+{
+  model <- NULL
+  fit <- function(data)
+  {
+    if (is.null(model)) {
+      model <<- nnet::nnet(data$x, data$y, ...)
+    } else {
+      model <<- nnet::nnet(data$x, data$y, Wts=model$wts, ...)
+    }
+  }
+
+  pred <- function(x=NULL, ...)
+  {
+    if (is.null(x)) predict(model, ...) else predict(model, x, ...)
+  }
+
+  self <- environment()
+  self
+}
+
+Pipeline <- function(...)
+{
+  steps <- list(...)
+
+  fit <- function(x, y, incr=FALSE)
+  {
+    data <- list(x=x, y=y)
+    for (i in seq_along(steps))
+    {
+      if (!incr | i != length(steps)) steps[[i]]$fit(data)
+      if (i != length(steps)) data <- steps[[i]]$transform(data)
+    }
+  }
+
+  pred <- function(x=NULL, ...)
+  {
+    data <- list(x=x, y=NULL)
+    for (i in seq_along(steps))
+    {
+      if (i != length(steps)) {
+        data <- steps[[i]]$transform(data)
+      } else {
+        return(steps[[i]]$pred(data$x, ...))
+      }
+    }
+  }
+  self <- environment()
+  self
+}
+
+p <- Pipeline(oh=OneHot(), fl=Flatten(),
+              pc=PCA(50), ml=MLP(size=50, MaxNWts=1e+4, softmax=TRUE))
+oh <- OneHot()
+fl <- Flatten()
+pc <- PCA(50)
+ml <- MLP(size=50, MaxNWts=1e+4, softmax=TRUE)
+
+p$fit(X_tr, Y_tr)
+p$pred(X_tr, type='class')
+
+tbl <- table(Y_tr, p$pred(X_tr, type='class'))
+cat(100*sum(diag(tbl))/sum(tbl), '%')
+tbl <- table(Y, p$pred(X, type='class'))
+cat(100*sum(diag(tbl))/sum(tbl), '%')
+tbl <- table(Y_te, p$pred(X_te, type='class'))
+cat(100*sum(diag(tbl))/sum(tbl), '%')
 
