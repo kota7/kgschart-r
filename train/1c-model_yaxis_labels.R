@@ -6,7 +6,6 @@ library(gridExtra)
 library(ggplot2)
 library(OpenImageR)
 library(magrittr)
-library(deepnet)
 
 set.seed(87)
 
@@ -147,28 +146,29 @@ PCA <- function(n, ...)
   self
 }
 
-MLP <- function(...)
+MLP <- function(hidden, output, ...)
 {
   model <- NULL
-  params <- list(...)
-
-
+  labels <- NULL
   fit <- function(data)
   {
     if (is.null(model)) {
       #model <<- nnet::nnet(data$x, data$y, ...)
-      model <<- deepnet::nn.train(data$x, data$y, ...)
+      model <<- deepnet::nn.train(data$x, data$y, hidden=hidden, output=output, ...)
+      if (output=='softmax') labels <<- colnames(data$y)
     } else {
       #model <<- nnet::nnet(data$x, data$y, Wts=model$wts, ...)
       model <<- deepnet::nn.train(data$x, data$y,
-                                  initB=model$B, initW=model$W, ...)
+                                  initB=model$B, initW=model$W,
+                                  hidden=hidden, output=output, ...)
     }
   }
 
   pred <- function(x, ...)
   {
     #if (is.null(x)) predict(model, ...) else predict(model, x, ...)
-    deepnet::nn.predict(model, x)
+    p <- deepnet::nn.predict(model, x)
+    if (output=='softmax') labels[max.col(p)] else p
   }
 
   self <- environment()
@@ -212,13 +212,11 @@ p <- Pipeline(oh=OneHot(),
               ml=MLP(hidden=c(50,50), output='softmax'))
 
 p$fit(X_tr, Y_tr)
-labels <- nnet::class.ind(Y_tr) %>% colnames()
-labels[p$pred(X_tr) %>% max.col()]
 
-tbl <- table(Y_tr, labels[p$pred(X_tr) %>% max.col()])
+tbl <- table(Y_tr, p$pred(X_tr))
 cat(100*sum(diag(tbl))/sum(tbl), '%')
-tbl <- table(Y, labels[p$pred(X) %>% max.col()])
+tbl <- table(Y, p$pred(X))
 cat(100*sum(diag(tbl))/sum(tbl), '%')
-tbl <- table(Y_te, labels[p$pred(X_te) %>% max.col()])
+tbl <- table(Y_te, p$pred(X_te))
 cat(100*sum(diag(tbl))/sum(tbl), '%')
 
