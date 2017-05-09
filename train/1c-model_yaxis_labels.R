@@ -6,6 +6,7 @@ library(gridExtra)
 library(ggplot2)
 library(OpenImageR)
 library(magrittr)
+library(deepnet)
 
 set.seed(87)
 
@@ -15,7 +16,7 @@ Y <- dget(file.path(datadir, 'Y'))
 
 # combine X into array (N, nrow, ncol)
 X <- abind(X, along=0)
-n<-5
+
 
 generate_augmented_data <- function(
   n, X, Y, avg_shift_rows=0.02, avg_shift_cols=0.02, noise_sd=0.03)
@@ -51,17 +52,18 @@ generate_augmented_data <- function(
     shift_cols <- (1-2*as.integer(runif(n)>0.5)) * rpois(n, lambda_col)
     # add -1 if negative since -1 is treated as 0, and so forth
     # in Augmentation function
-    shift_rows <- shift_rows - as.integer(shift_rows<0)
-    shift_cols <- shift_cols - as.integer(shift_cols<0)
+    #shift_rows <- shift_rows - as.integer(shift_rows<0)
+    #shift_cols <- shift_cols - as.integer(shift_cols<0)
 
     # flip the image color temporarily 0 <-> 1
     # since Augmentation function pads 0 (black) in.
-    out_X <- 1 - out_X
+    #out_X <- 1 - out_X
     for (i in 1:n)
       out_X[i,,] <- Augmentation(out_X[i,,],
                                  shift_rows=shift_rows[i],
-                                 shift_cols=shift_cols[i])
-    out_X <- 1 - out_X
+                                 shift_cols=shift_cols[i],
+                                 padded_value=1)
+    #out_X <- 1 - out_X
   }
   list(X = out_X, Y = out_Y)
 }
@@ -148,18 +150,25 @@ PCA <- function(n, ...)
 MLP <- function(...)
 {
   model <- NULL
+  params <- list(...)
+
+
   fit <- function(data)
   {
     if (is.null(model)) {
-      model <<- nnet::nnet(data$x, data$y, ...)
+      #model <<- nnet::nnet(data$x, data$y, ...)
+      model <<- deepnet::nn.train(data$x, data$y, ...)
     } else {
-      model <<- nnet::nnet(data$x, data$y, Wts=model$wts, ...)
+      #model <<- nnet::nnet(data$x, data$y, Wts=model$wts, ...)
+      model <<- deepnet::nn.train(data$x, data$y,
+                                  initB=model$B, initW=model$W, ...)
     }
   }
 
-  pred <- function(x=NULL, ...)
+  pred <- function(x, ...)
   {
-    if (is.null(x)) predict(model, ...) else predict(model, x, ...)
+    #if (is.null(x)) predict(model, ...) else predict(model, x, ...)
+    deepnet::nn.predict(model, x)
   }
 
   self <- environment()
@@ -196,20 +205,20 @@ Pipeline <- function(...)
   self
 }
 
-p <- Pipeline(oh=OneHot(), fl=Flatten(),
-              pc=PCA(50), ml=MLP(size=50, MaxNWts=1e+4, softmax=TRUE))
-oh <- OneHot()
-fl <- Flatten()
-pc <- PCA(50)
-ml <- MLP(size=50, MaxNWts=1e+4, softmax=TRUE)
+p <- Pipeline(oh=OneHot(),
+              fl=Flatten(),
+              pc=PCA(50),
+              #ml=MLP(size=50, MaxNWts=1e+4, softmax=TRUE),
+              ml=MLP(hidden=c(50,50), output='softmax'))
 
 p$fit(X_tr, Y_tr)
-p$pred(X_tr, type='class')
+labels <- nnet::class.ind(Y_tr) %>% colnames()
+labels[p$pred(X_tr) %>% max.col()]
 
-tbl <- table(Y_tr, p$pred(X_tr, type='class'))
+tbl <- table(Y_tr, labels[p$pred(X_tr) %>% max.col()])
 cat(100*sum(diag(tbl))/sum(tbl), '%')
-tbl <- table(Y, p$pred(X, type='class'))
+tbl <- table(Y, labels[p$pred(X) %>% max.col()])
 cat(100*sum(diag(tbl))/sum(tbl), '%')
-tbl <- table(Y_te, p$pred(X_te, type='class'))
+tbl <- table(Y_te, labels[p$pred(X_te) %>% max.col()])
 cat(100*sum(diag(tbl))/sum(tbl), '%')
 

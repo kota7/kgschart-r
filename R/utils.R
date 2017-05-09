@@ -20,7 +20,7 @@ rgb_dist <- function(arr, color)
 
 
 
-image_plot <- function(arr, plot=FALSE)
+image_plot <- function(arr, plot=FALSE, eps=1e-10)
 {
   # Create graphic object of an image
   #
@@ -28,6 +28,7 @@ image_plot <- function(arr, plot=FALSE)
   #   arr: array of size either (3, nrow, ncol) or (nrow, ncol).
   #        the former is RGB and the latter gray scale
   #   plot: if TRUE, show image
+  #   eps: very small value shifted to avoid rgb range error
   #
   # returns:
   #   grid::rastergrob
@@ -37,7 +38,7 @@ image_plot <- function(arr, plot=FALSE)
     arr <- aperm(arr, c(2,3,1))
   } else {
     # scale to [0,1]
-    x <- range(arr, na.rm=TRUE)
+    x <- range(arr, na.rm=TRUE) + c(-eps, +eps)
     y <- c(max(x[1], 0), min(x[2], 1))
     b <- diff(y)/diff(x)
     a <- y[1]-b*x[1]
