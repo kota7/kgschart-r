@@ -47,8 +47,8 @@ random_plot(X_te, Y_te)
 
 
 p <- Pipeline(fl=Flatten(),
-              #pc=PCA(50),
-              ml=MLP(hidden=c(25, 25), output='softmax'))
+              pc=PCA(50),
+              ml=MLP(hidden=c(50), output='softmax'))
 
 
 # initial fit, this will fix PCA transformer

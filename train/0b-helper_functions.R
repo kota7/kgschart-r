@@ -1,4 +1,4 @@
-shift_matrix <- function(m, rows, cols, value)
+shift_matrix <- function(m, rows=0, cols=0, value=0)
 {
   # shift matrix and pad arbitrary value
   #
@@ -11,7 +11,35 @@ shift_matrix <- function(m, rows, cols, value)
   # returns:
   #   matrix
 
-  message('shift_matrix must be implemented')
+  if (abs(rows) >= nrow(m) || abs(cols) >= ncol(m)) {
+    m[] <- value
+    return(m)
+  }
+
+  if (rows > 0) {
+    m <- rbind(
+      matrix(value, nrow=rows, ncol=ncol(m)),
+      m[1:(nrow(m)-rows),]
+    )
+  } else if (rows < 0) {
+    m <- rbind(
+      m[(1-rows):nrow(m),],
+      matrix(value, nrow=-rows, ncol=ncol(m))
+    )
+  }
+
+  if (cols > 0) {
+    m <- cbind(
+      matrix(value, nrow=nrow(m), ncol=cols),
+      m[,1:(ncol(m)-cols)]
+    )
+  } else if (cols < 0) {
+    m <- cbind(
+      m[,(1-cols):ncol(m)],
+      matrix(value, nrow=nrow(m), ncol=-cols)
+    )
+  }
+
   m
 }
 
