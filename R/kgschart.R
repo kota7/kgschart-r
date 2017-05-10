@@ -36,6 +36,10 @@ kgschart <- function(src, ...)
   line_index <- get_line_index(graph)
   plot(-line_index, type='l')
 
+  label_positions <- round(seq(t, b, length.out=ngrids+2))
+  print(label_positions)
+
+  rank_range <- get_rank_range(yaxis, label_positions)
   # letters <- extract_axis_letters(yaxis)
   # print(length(letters))
   # grobs <- lapply(letters, image_plot)
