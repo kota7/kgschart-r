@@ -16,12 +16,49 @@ source('train/0b-helper_functions.R')
 
 set.seed(87)
 
-datadir <- 'train/data/yaxis/'
+datadir <- 'train/data/caption-ja//'
 X <- dget(file.path(datadir, 'X'))
 Y <- dget(file.path(datadir, 'Y'))
 
 # combine X into array (N, nrow, ncol)
 X <- abind(X, along=0)
+
+# we only need to classify numbers, '/', '~', ':' and others, so remove
+# other letters from the sample.
+# in application, other letters are randomly assigned to one of the relevent letters
+# this confusion would not matter since we can look for "yy/mm/dd hh:mm"
+# expression to identify the period information
+
+ind <- which(Y %in% c(0:9, '/', '~', ':'))
+X <- X[ind,,]
+Y <- Y[ind]
+
+# crop X as possible
+i1 <- +Inf
+j1 <- +Inf
+i2 <- -Inf
+j2 <- -Inf
+for (i in dim(X)[1])
+{
+  flg <- (X[i,,] < 1)
+  row_range <- range(which(apply(flg, MARGIN=1, any)))
+  col_range <- range(which(apply(flg, MARGIN=2, any)))
+  i1 <- min(i1, row_range[1])
+  j1 <- min(j1, col_range[1])
+  i2 <- max(i2, row_range[2])
+  j2 <- max(j2, col_range[2])
+}
+# allow 20% margins
+target_rows <- ceiling((i2-i1+1)*1.2)
+target_cols <- ceiling((j2-j1+1)*1.2)
+
+X <- X[, i1:i2, j1:j2]
+X <- lapply(1:dim(X)[1], function(i) {
+  kgschart:::pad_crop_image(
+    X[i,,],  target_rows=target_rows, target_cols=target_cols, value=1)
+})
+X <- abind::abind(X, along=0)
+random_plot(X, Y)
 
 
 # generate train and test data
@@ -36,8 +73,6 @@ X_te <- tmp$X
 Y_te <- tmp$Y
 
 
-
-random_plot(X, Y)
 random_plot(X_tr, Y_tr)
 random_plot(X_te, Y_te)
 
@@ -48,7 +83,7 @@ random_plot(X_te, Y_te)
 
 p <- Pipeline(fl=Flatten(),
               #pc=PCA(50),
-              ml=MLP(hidden=c(25, 25), output='softmax'))
+              ml=MLP(hidden=c(50,50), output='softmax'))
 
 
 # initial fit, this will fix PCA transformer
@@ -60,7 +95,7 @@ accuracy <- function(p)
        original = mean(Y==p$prediction(X))
   )
 }
-
+accuracy(p)
 
 # update the model incrementally
 result <- as.data.frame(accuracy(p))
@@ -93,7 +128,7 @@ ggplot(tmp, aes(iter, accuracy, color=data, linetype=data)) +
 
 # save the pretrained model
 p$input_size <- dim(X)[2:3]
-saveRDS(p, 'train/outcome/yaxis-classifier.rds')
+saveRDS(p, 'train/outcome/caption-ja-classifier.rds')
 
 
 

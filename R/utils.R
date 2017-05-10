@@ -54,12 +54,14 @@ image_plot <- function(arr, plot=FALSE, eps=1e-10)
     # change to channel-last order
     arr <- aperm(arr, c(2,3,1))
   } else {
-    # scale to [0,1]
-    x <- range(arr, na.rm=TRUE) + c(-eps, +eps)
-    y <- c(max(x[1], 0), min(x[2], 1))
-    b <- diff(y)/diff(x)
-    a <- y[1]-b*x[1]
-    arr <- a + b*arr
+    #x <- range(arr, na.rm=TRUE) + c(-eps, +eps)
+    #y <- c(max(x[1], 0), min(x[2], 1))
+    #b <- diff(y)/diff(x)
+    #a <- y[1]-b*x[1]
+    #a + b*arr
+    # truncate to [0,1]
+    arr[arr > 1] <- 1
+    arr[arr < 0] <- 0
   }
   out <- grid::rasterGrob(arr)
 

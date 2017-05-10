@@ -8,7 +8,7 @@ extract_axis_letters <- function(x)
   # return:
   #   list of array of size (nrow, ncol), representing gray scale images
 
-  if (is.null(x)) return(NULL)
+  if (is.null(x)) return(list())
   stopifnot(is.array(x))
   stopifnot(length(dim(x)) == 3)
   stopifnot(dim(x)[1] == 3)
@@ -58,7 +58,7 @@ get_label_matrices <- function(x, positions)
   #   a list of matrices, each matrix represents a gray scale image
   #
 
-  if (is.null(x)) return(NULL)
+  if (is.null(x)) return(list())
   stopifnot(is.array(x))
   stopifnot(length(dim(x)) == 3)
   stopifnot(dim(x)[1] == 3)
