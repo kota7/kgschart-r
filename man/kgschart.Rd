@@ -6,6 +6,14 @@
 \usage{
 kgschart(src, ...)
 }
+\arguments{
+\item{src}{png file name}
+
+\item{...}{other arguments for \code{png::readPNG}}
+}
+\value{
+\code{kgschart} class object
+}
 \description{
 KGS Rank Graph Parser
 }

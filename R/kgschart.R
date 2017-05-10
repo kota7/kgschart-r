@@ -1,6 +1,9 @@
 
 #' KGS Rank Graph Parser
-#' @return NULL
+#'
+#' @param src png file name
+#' @param ... other arguments for \code{png::readPNG}
+#' @return \code{kgschart} class object
 #' @examples
 #' x <- kgschart(system.file("extdata/leela-ja_JP.png",
 #'                           package = "kgschart"))
