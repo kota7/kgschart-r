@@ -40,6 +40,7 @@ kgschart <- function(src, ...)
   print(label_positions)
 
   rank_range <- get_rank_range(yaxis, label_positions)
+  print(rank_range)
   # letters <- extract_axis_letters(yaxis)
   # print(length(letters))
   # grobs <- lapply(letters, image_plot)

@@ -116,6 +116,30 @@ get_label_matrices <- function(x, positions)
 
 get_rank_range <- function(x, label_positions)
 {
-  label_list <- get_label_matrices(x, label_positions)
-  str(label_list)
+  labels <- get_label_matrices(x, label_positions) %>%
+    # pad all images to the required shape, then stack
+    lapply(function(a) {
+      abind::abind(lapply(a, pad_crop_image,
+                          target_rows=yaxis_classifier$input_size[1],
+                          target_cols=yaxis_classifier$input_size[2], value=1),
+                   along=0)
+    }) %>%
+    # predict the letters
+    lapply(function(a) if (is.null(a)) '' else yaxis_classifier$prediction(a)) %>%
+    lapply(paste0, collapse='') %>%
+    unlist()
+  #print(labels)
+
+  # find max rank from the top
+  num_rank <- str_to_num_rank(labels)
+  #print(num_rank)
+  if (all(is.na(num_rank))) return(NULL)
+
+  i <- which.max(num_rank)
+  max_rank <- num_rank[i] + (i-1L)
+  i <- which.min(num_rank)
+  min_rank <- num_rank[i] - (i-length(num_rank))
+
+
+  num_to_str_rank(c(min_rank, max_rank))
 }

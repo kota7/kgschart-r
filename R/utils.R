@@ -11,6 +11,10 @@ NULL
 NULL
 
 
+#' @importFrom magrittr %>%
+NULL
+
+
 rgb_dist <- function(arr, color)
 {
   # Compute cell-wise distance between array and a color
@@ -161,3 +165,41 @@ pad_crop_image <- function(arr, target_rows, target_cols, value)
 }
 
 
+
+str_to_num_rank <- function(s)
+{
+  # convert str rating to numeric
+  #
+  # args:
+  #   s: character vector of ratings, such as 3d, 2k
+  #
+  # returns:
+  #   integer vector. NA for invalid strings
+  #
+  # note:
+  #   2d=1, 1d=0, 1k=-1, 2k=-2 ...,
+  #   i.e., dan's are positive and kyu's are negative
+
+  tmp <- stringr::str_match(s, '([0-9]+)([dk])')
+  n <- as.integer(tmp[,2])
+  l <- tmp[,3]
+  n[which(l=='k')] <- -n[which(l=='k')]
+  n[which(l=='d')] <- n[which(l=='d')] - 1
+  n
+}
+
+
+num_to_str_rank <- function(n)
+{
+  # convert numeric rating to str
+  #
+  # args:
+  #   n: numeric vector
+  #
+  # returns:
+  #   character vector
+  s <- rep(NA_character_, length(n))
+  s[which(n<0)]  <- paste(-n[which(n<0)], 'k', sep='')
+  s[which(n>=0)] <- paste(1+n[which(n>=0)], 'd', sep='')
+  s
+}

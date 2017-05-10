@@ -13,8 +13,10 @@ Imports:
     deepnet,
     grid,
     gridExtra,
+    magrittr,
     nnet,
     png,
-    stats
+    stats,
+    stringr,
 LazyData: true
 RoxygenNote: 5.0.1

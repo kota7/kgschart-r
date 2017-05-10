@@ -50,6 +50,13 @@ MLP <- function(hidden, output, ...)
                                   initB=model$B, initW=model$W,
                                   hidden=hidden, output=output, ...)
     }
+
+    # remove unnecessary big attributes, to make the object size small
+    model$post <<- NULL
+    model$pre  <<- NULL
+    model$e    <<- NULL
+    model$vW   <<- NULL
+    model$vB   <<- NULL
   }
 
   format_y <- function(y)

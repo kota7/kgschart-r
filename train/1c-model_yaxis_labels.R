@@ -8,7 +8,6 @@ library(OpenImageR)
 library(magrittr)
 library(tidyr)
 library(reshape2)
-library(yaml)
 library(dplyr)
 
 
@@ -114,8 +113,8 @@ random_plot(X_te, Y_te)
 
 
 p <- Pipeline(fl=Flatten(),
-              pc=PCA(60),
-              ml=MLP(hidden=c(30,30), output='softmax'))
+              #pc=PCA(50),
+              ml=MLP(hidden=c(25, 25), output='softmax'))
 
 
 # initial fit, this will fix PCA transformer
@@ -134,7 +133,7 @@ result <- as.data.frame(accuracy(p))
 consec_perfect <- 0
 for (i in 1:5000)
 {
-  newdata <- generate_augmented_data(500, X, Y)
+  newdata <- generate_augmented_data(1000, X, Y)
 
   p$fit(newdata$X, newdata$Y)
 
@@ -159,17 +158,13 @@ ggplot(tmp, aes(iter, accuracy, color=data, linetype=data)) +
 
 
 # save the pretrained model
-saveRDS(p, 'train/outcome/yaxis-predictor.rds')
+p$input_size <- dim(X)[2:3]
+saveRDS(p, 'train/outcome/yaxis-classifier.rds')
 
-# and config file, that records the input shape
-list(input_shape=dim(X)[2:3]) %>% as.yaml() %>%
-  write('train/outcome/yaxis-config.yml')
 
 
 # saved model is a prediction model which takes
-# 3d-array (N, nrow, ncol),
-# where nrow and ncol is recorded in "yaxis-config.yml"
-
+# 3d-array (N, nrow, ncol)
 # later, the objects will be registered as interal data,
 # so they can be used within the package
 
