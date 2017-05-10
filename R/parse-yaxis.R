@@ -17,7 +17,7 @@ extract_axis_letters <- function(x)
   thres_frac <- 0.95
 
   dist <- rgb_dist(x, .BEIGE)
-  is_beige = (dist < thres_dist)
+  is_beige <- (dist < thres_dist)
 
   frac <- apply(is_beige, FUN=mean, MARGIN=1)
   is_bg_row <- (frac >= thres_frac)
