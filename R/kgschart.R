@@ -30,12 +30,12 @@ kgschart <- function(src, ...)
     caption <- NULL
   }
 
-  # ngrids <- get_num_grids(graph)
-  # print(ngrids)
-  #
-  # line_index <- get_line_index(graph)
-  # plot(-line_index, type='l')
-  #
+  ngrids <- get_num_grids(graph)
+  print(ngrids)
+
+  line_index <- get_line_index(graph)
+  plot(-line_index, type='l')
+
   # letters <- extract_axis_letters(yaxis)
   # print(length(letters))
   # grobs <- lapply(letters, image_plot)
