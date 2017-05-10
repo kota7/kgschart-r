@@ -1,4 +1,5 @@
 train
+data-raw
 
 ^.*\.Rproj$
 ^\.Rproj\.user$

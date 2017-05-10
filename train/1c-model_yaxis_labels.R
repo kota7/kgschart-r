@@ -6,6 +6,13 @@ library(gridExtra)
 library(ggplot2)
 library(OpenImageR)
 library(magrittr)
+library(tidyr)
+library(reshape2)
+library(yaml)
+library(dplyr)
+
+
+source('train/0a-quick_pipeline.R')
 
 set.seed(87)
 
@@ -68,11 +75,13 @@ generate_augmented_data <- function(
 }
 
 # generate train and test data
+# train data is to create the PCA decomposition and the initial MLP model
+# test data is used for performance check
 tmp <- generate_augmented_data(10000, X, Y)
 X_tr <- tmp$X
 Y_tr <- tmp$Y
 
-tmp <- generate_augmented_data(10000, X, Y)
+tmp <- generate_augmented_data(2000, X, Y)
 X_te <- tmp$X
 Y_te <- tmp$Y
 
@@ -101,122 +110,66 @@ random_plot(X_te, Y_te)
 
 
 
-# create pipeline like object
-OneHot <- function(...)
-{
-  fit <- function(data) {}
-  transform <- function(data)
-  {
-    data$y <- nnet::class.ind(data$y)
-    data
-  }
-  self <- environment()
-  self
-}
 
-Flatten <- function(...)
-{
-  fit <- function(data) {}
 
-  transform <- function(data)
-  {
-    dim(data$x) <- c(dim(data$x)[1], dim(data$x)[2]*dim(data$x)[3])
-    data
-  }
 
-  self <- environment()
-  self
-}
+p <- Pipeline(fl=Flatten(),
+              pc=PCA(60),
+              ml=MLP(hidden=c(30,30), output='softmax'))
 
-PCA <- function(n, ...)
-{
-  model <- NULL
-  fit <- function(data)
-  {
-    model <<- prcomp(data$x, ...)
-  }
 
-  transform <- function(data)
-  {
-    data$x <- predict(model, data$x)[, 1:n]
-    data
-  }
-
-  self <- environment()
-  self
-}
-
-MLP <- function(hidden, output, ...)
-{
-  model <- NULL
-  labels <- NULL
-  fit <- function(data)
-  {
-    if (is.null(model)) {
-      #model <<- nnet::nnet(data$x, data$y, ...)
-      model <<- deepnet::nn.train(data$x, data$y, hidden=hidden, output=output, ...)
-      if (output=='softmax') labels <<- colnames(data$y)
-    } else {
-      #model <<- nnet::nnet(data$x, data$y, Wts=model$wts, ...)
-      model <<- deepnet::nn.train(data$x, data$y,
-                                  initB=model$B, initW=model$W,
-                                  hidden=hidden, output=output, ...)
-    }
-  }
-
-  pred <- function(x, ...)
-  {
-    #if (is.null(x)) predict(model, ...) else predict(model, x, ...)
-    p <- deepnet::nn.predict(model, x)
-    if (output=='softmax') labels[max.col(p)] else p
-  }
-
-  self <- environment()
-  self
-}
-
-Pipeline <- function(...)
-{
-  steps <- list(...)
-
-  fit <- function(x, y, incr=FALSE)
-  {
-    data <- list(x=x, y=y)
-    for (i in seq_along(steps))
-    {
-      if (!incr | i != length(steps)) steps[[i]]$fit(data)
-      if (i != length(steps)) data <- steps[[i]]$transform(data)
-    }
-  }
-
-  pred <- function(x=NULL, ...)
-  {
-    data <- list(x=x, y=NULL)
-    for (i in seq_along(steps))
-    {
-      if (i != length(steps)) {
-        data <- steps[[i]]$transform(data)
-      } else {
-        return(steps[[i]]$pred(data$x, ...))
-      }
-    }
-  }
-  self <- environment()
-  self
-}
-
-p <- Pipeline(oh=OneHot(),
-              fl=Flatten(),
-              pc=PCA(50),
-              #ml=MLP(size=50, MaxNWts=1e+4, softmax=TRUE),
-              ml=MLP(hidden=c(50,50), output='softmax'))
-
+# initial fit, this will fix PCA transformer
 p$fit(X_tr, Y_tr)
 
-tbl <- table(Y_tr, p$pred(X_tr))
-cat(100*sum(diag(tbl))/sum(tbl), '%')
-tbl <- table(Y, p$pred(X))
-cat(100*sum(diag(tbl))/sum(tbl), '%')
-tbl <- table(Y_te, p$pred(X_te))
-cat(100*sum(diag(tbl))/sum(tbl), '%')
+accuracy <- function(p)
+{
+  list(augmented = mean(Y_te==p$prediction(X_te)),
+       original = mean(Y==p$prediction(X))
+  )
+}
+
+
+# update the model incrementally
+result <- as.data.frame(accuracy(p))
+consec_perfect <- 0
+for (i in 1:5000)
+{
+  newdata <- generate_augmented_data(500, X, Y)
+
+  p$fit(newdata$X, newdata$Y)
+
+  acc <- accuracy(p)
+  result <- rbind(result, as.data.frame(acc))
+
+  consec_perfect <- if (all(unlist(acc) >= 1-1e-6)) consec_perfect + 1 else 0
+  cat(sprintf('iter %4d: augmented=%5.1f%%, original=%5.1f%%, consec=%d',
+              i, acc$augmented*100, acc$original*100, consec_perfect), '\n')
+
+  if (consec_perfect >= 10) {
+    cat('DONE!\n')
+    break
+  }
+}
+
+
+tmp <- result %>% mutate(iter=0:(nrow(.)-1)) %>%
+  melt(id.vars='iter', value.name='accuracy', variable.name='data')
+ggplot(tmp, aes(iter, accuracy, color=data, linetype=data)) +
+  geom_line(size=1)
+
+
+# save the pretrained model
+saveRDS(p, 'train/outcome/yaxis-predictor.rds')
+
+# and config file, that records the input shape
+list(input_shape=dim(X)[2:3]) %>% as.yaml() %>%
+  write('train/outcome/yaxis-config.yml')
+
+
+# saved model is a prediction model which takes
+# 3d-array (N, nrow, ncol),
+# where nrow and ncol is recorded in "yaxis-config.yml"
+
+# later, the objects will be registered as interal data,
+# so they can be used within the package
 

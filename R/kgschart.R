@@ -1,6 +1,9 @@
 
 #' KGS Rank Graph Parser
-#' @return NULL
+#'
+#' @param src png file name
+#' @param ... other arguments for \code{png::readPNG}
+#' @return \code{kgschart} class object
 #' @examples
 #' x <- kgschart(system.file("extdata/leela-ja_JP.png",
 #'                           package = "kgschart"))
@@ -27,12 +30,16 @@ kgschart <- function(src, ...)
     caption <- NULL
   }
 
-  # ngrids <- get_num_grids(graph)
-  # print(ngrids)
-  #
-  # line_index <- get_line_index(graph)
-  # plot(-line_index, type='l')
-  #
+  ngrids <- get_num_grids(graph)
+  print(ngrids)
+
+  line_index <- get_line_index(graph)
+  plot(-line_index, type='l')
+
+  label_positions <- round(seq(t, b, length.out=ngrids+2))
+  print(label_positions)
+
+  rank_range <- get_rank_range(yaxis, label_positions)
   # letters <- extract_axis_letters(yaxis)
   # print(length(letters))
   # grobs <- lapply(letters, image_plot)

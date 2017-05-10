@@ -1,3 +1,16 @@
+# packages deepnet, nnet, stats are only used within the pretrained models
+# hence the R check generates a note:
+# "Namespace in Imports field not imported from"
+# following import-from would avoid the note
+
+#' @importFrom deepnet nn.predict nn.train
+NULL
+#' @importFrom nnet class.ind
+NULL
+#' @importFrom stats prcomp
+NULL
+
+
 rgb_dist <- function(arr, color)
 {
   # Compute cell-wise distance between array and a color
@@ -146,3 +159,5 @@ pad_crop_image <- function(arr, target_rows, target_cols, value)
   if (length(original_dim)==2) out <- drop(out)
   out
 }
+
+
