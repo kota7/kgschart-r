@@ -23,4 +23,6 @@ Imports:
     utils
 LazyData: true
 RoxygenNote: 5.0.1
-Suggests: testthat
+Suggests: 
+    jsonlite,
+    testthat
