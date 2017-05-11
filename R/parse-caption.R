@@ -1,3 +1,87 @@
+get_time_range <- function(x)
+{
+  # find start and end of period covered
+  #
+  # args:
+  #   x: array of size (3, nrow, ncol), that represents caption area
+  #
+  # returns:
+  #   POSIXct vector of size 2 if start and end are identified. otherwise NULL
+
+  if (is.null(x)) return(NULL)
+  stopifnot(is.array(x))
+  stopifnot(length(dim(x)) == 3)
+  stopifnot(dim(x)[1] == 3)
+
+  image_list <- extract_caption_letters(x)
+  if (length(image_list) < 1) return(NULL)
+
+
+  # try caption-ja classifier
+  cap <- image_list %>%
+    # pad
+    lapply(pad_crop_image,
+           target_rows=caption_ja_classifier$input_size[1],
+           target_cols=caption_ja_classifier$input_size[2], value=1) %>%
+    # stack
+    abind::abind(along=0) %>%
+    # predict
+    caption_ja_classifier$prediction() %>%
+    paste0(collapse='')
+
+
+  tmp <- stringr::str_match_all(
+    cap, '([0-9]{2}/[0-9]{2}/[0-9]{2})[^0-9]*([0-9]{2}:[0-9]{2}){0,1}')[[1]]
+  if (nrow(tmp) >= 2) {
+    tmp <- tail(tmp, 2)
+    tmp[is.na(tmp[,3]),3] <- '00:00'
+    s <- paste(tmp[,2], tmp[,3], sep=' ')
+    out <- as.POSIXct(s, format='%y/%m/%d %H:%M', tz='UTC')
+    return(out)
+  }
+
+  # if caption-ja does not work, try caption-en
+  cap <- image_list %>%
+    # pad
+    lapply(pad_crop_image,
+           target_rows=caption_en_classifier$input_size[1],
+           target_cols=caption_en_classifier$input_size[2], value=1) %>%
+    # stack
+    abind::abind(along=0) %>%
+    # predict
+    caption_en_classifier$prediction() %>%
+    paste0(collapse='')
+
+  tmp <- stringr::str_match_all(
+    cap, '([A-Za-z0-9]{3})([0-9]{1,2}),([0-9]{4})')[[1]]
+  if (nrow(tmp) >= 2) {
+    tmp <- tail(tmp, 2)
+    yr <- as.integer(tmp[,4])
+    dy <- as.integer(tmp[,3])
+    mt <- tmp[,2]
+    # resolve fuzziness in month names
+    if (is.matrix(caption_en_classifier$fuzzy)) {
+      for (i in 1:nrow(caption_en_classifier$fuzzy))
+        mt <- gsub(caption_en_classifier$fuzzy[i,2],
+                   caption_en_classifier$fuzzy[i,1],
+                   mt)
+    }
+    mt <- match(mt, month.abb)
+    if (any(is.na(mt))) {
+      warning('failed to retrieve month from: ', cap)
+      return(NULL)
+    }
+    out <- as.POSIXct(paste(yr,mt,dy, sep='-'), tz='UTC', format='%Y-%m-%d')
+    return(out)
+  }
+
+  return(NULL)
+
+
+
+}
+
+
 extract_caption_letters <- function(x)
 {
   # extract all letters from caption image

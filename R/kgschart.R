@@ -52,6 +52,10 @@ kgschart <- function(src, ...)
   # grobs <- lapply(letters, image_plot)
   # plot(gridExtra::arrangeGrob(grobs=grobs))
 
+
+  time_range <- get_time_range(caption)
+  print(time_range)
+
   structure(list(src=x, graph=graph, yaxis=yaxis, caption=caption),
             class = 'kgschart')
 }

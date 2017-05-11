@@ -116,6 +116,20 @@ get_label_matrices <- function(x, positions)
 
 get_rank_range <- function(x, label_positions)
 {
+  # find min and max of ratings
+  #
+  # args:
+  #   x: array of size (3, nrow, ncol) representing yaxis image
+  #   label_positions: row indices that roughly identify the location of labels
+  #
+  # returns:
+  #   character vector of size 2 if min and max are found. otherwise NULL
+
+  if (is.null(x)) return(NULL)
+  stopifnot(is.array(x))
+  stopifnot(length(dim(x)) == 3)
+  stopifnot(dim(x)[1] == 3)
+
   labels <- get_label_matrices(x, label_positions) %>%
     # pad all images to the required shape, then stack
     lapply(function(a) {

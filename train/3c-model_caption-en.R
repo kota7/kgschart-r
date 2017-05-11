@@ -155,6 +155,7 @@ if (!success) {
 } else {
   # save the pretrained model
   p$input_size <- dim(X)[2:3]
+  p$fuzzy <- matrix(fuzz, byrow=TRUE, ncol=2)
   saveRDS(p, 'train/outcome/caption-en-classifier.rds')
 }
 

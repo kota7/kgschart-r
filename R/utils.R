@@ -142,8 +142,8 @@ pad_crop_image <- function(arr, target_rows, target_cols, value)
   } else {
     # crop rows
     i1 <- -rows_toadd %/% 2
-    i2 <- i1 + target_rows
-    arr <- arr[,i1:i2,]
+    i2 <- i1 + target_rows-1
+    arr <- arr[,i1:i2,, drop=FALSE]
     top <- 1
     bottom <- dim(arr)[2]
   }
@@ -155,8 +155,8 @@ pad_crop_image <- function(arr, target_rows, target_cols, value)
   } else {
     # crop cols
     j1 <- -cols_toadd %/% 2
-    j2 <- j1 + target_cols
-    arr <- arr[,,j1:j2]
+    j2 <- j1 + target_cols-1
+    arr <- arr[,,j1:j2, drop=FALSE]
     left <- 1
     right <- dim(arr)[3]
   }
