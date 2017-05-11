@@ -4,7 +4,7 @@ library(grid)
 library(gtable)
 library(gridExtra)
 library(ggplot2)
-library(OpenImageR)
+#library(OpenImageR)
 library(magrittr)
 library(tidyr)
 library(reshape2)
@@ -47,8 +47,8 @@ random_plot(X_te, Y_te)
 
 
 p <- Pipeline(fl=Flatten(),
-              pc=PCA(50),
-              ml=MLP(hidden=c(50), output='softmax'))
+              #pc=PCA(50),
+              ml=MLP(hidden=c(50,50), output='softmax'))
 
 
 # initial fit, this will fix PCA transformer
@@ -65,7 +65,8 @@ accuracy <- function(p)
 # update the model incrementally
 result <- as.data.frame(accuracy(p))
 consec_perfect <- 0
-for (i in 1:5000)
+success <- FALSE
+for (i in 1:1000)
 {
   newdata <- generate_augmented_data(1000, X, Y)
 
@@ -80,10 +81,10 @@ for (i in 1:5000)
 
   if (consec_perfect >= 10) {
     cat('DONE!\n')
+    success <- TRUE
     break
   }
 }
-
 
 tmp <- result %>% mutate(iter=0:(nrow(.)-1)) %>%
   melt(id.vars='iter', value.name='accuracy', variable.name='data')
@@ -91,10 +92,13 @@ ggplot(tmp, aes(iter, accuracy, color=data, linetype=data)) +
   geom_line(size=1)
 
 
-# save the pretrained model
-p$input_size <- dim(X)[2:3]
-saveRDS(p, 'train/outcome/yaxis-classifier.rds')
-
+if (!success) {
+  random_plot_inaccurate(p, X_te, Y_te)
+} else {
+  # save the pretrained model
+  p$input_size <- dim(X)[2:3]
+  saveRDS(p, 'train/outcome/yaxis-classifier.rds')
+}
 
 
 # saved model is a prediction model which takes

@@ -45,7 +45,10 @@ shift_matrix <- function(m, rows=0, cols=0, value=0)
 
 
 generate_augmented_data <- function(
-  n, X, Y, avg_shift_rows=0.02, avg_shift_cols=0.02, noise_sd=0.03)
+  n, X, Y,
+  avg_shift_rows=0.05, max_shift_rows=2,
+  avg_shift_cols=0.05, max_shift_cols=2,
+  noise_sd=0.03)
 {
   # Generate augmented image data, associated with labels
   #
@@ -56,6 +59,8 @@ generate_augmented_data <- function(
   #        Y must be a vector of target labels
   #   avg_shift_rows,avg_shift_cols:
   #        average shift sizes in fraction to the original size
+  #   max_shift_rows,max_shift_cols:
+  #        maximum shift size
   #   noise_sd: degree of noise to be added
   index <- sample.int(dim(X)[1], n, replace=TRUE)
 
@@ -68,9 +73,10 @@ generate_augmented_data <- function(
     lambda_row <- dim(X)[2]*avg_shift_rows
     lambda_col <- dim(X)[3]*avg_shift_cols
 
-    shift_rows <- (1-2*as.integer(runif(n)>0.5)) * rpois(n, lambda_row)
-    shift_cols <- (1-2*as.integer(runif(n)>0.5)) * rpois(n, lambda_col)
-
+    shift_rows <- pmin(rpois(n, lambda_row), max_shift_rows)
+    shift_cols <- pmin(rpois(n, lambda_col), max_shift_cols)
+    shift_rows <- shift_rows*(1-2*as.integer(runif(n)>0.5))
+    shift_cols <- shift_cols*(1-2*as.integer(runif(n)>0.5))
     for (i in 1:n)
       out_X[i,,] <- shift_matrix(out_X[i,,], shift_rows[i], shift_cols[i], 1)
   }
@@ -104,4 +110,34 @@ random_plot <- function(X, Y, Y2=NULL)
 
   out <- arrangeGrob(grobs=grob_list, nrow=3, ncol=5)
   plot(out)
+}
+
+
+random_plot_inaccurate <- function(p, X, Y)
+{
+  # randomly plot inaccurate cases
+  pre <- p$prediction(X)
+  ind <- (pre != Y)
+  random_plot(X[ind,,], Y[ind], pre[ind])
+}
+
+
+
+
+ngram <- function(s, n)
+{
+  # return n-gram from string s
+  #
+  # args:
+  #   s: a character
+  #   n: n
+  #
+  # returns:
+  #   character vector
+  out = character(0)
+  for (i in n:nchar(s))
+  {
+    out <- c(out, substring(s, i-n+1, i))
+  }
+  unique(out)
 }

@@ -16,22 +16,46 @@ source('train/0b-helper_functions.R')
 
 set.seed(87)
 
-datadir <- 'train/data/caption-ja/'
+datadir <- 'train/data/caption-en/'
 X <- dget(file.path(datadir, 'X'))
 Y <- dget(file.path(datadir, 'Y'))
 
 # combine X into array (N, nrow, ncol)
 X <- abind(X, along=0)
 
-# we only need to classify numbers, '/', '~', ':' and others, so remove
-# other letters from the sample.
-# in application, other letters are randomly assigned to one of the relevent letters
-# this confusion would not matter since we can look for "yy/mm/dd hh:mm"
-# expression to identify the period information
 
-ind <- which(Y %in% c(0:9, '/', '~', ':'))
-X <- X[ind,,]
-Y <- Y[ind]
+# We allow some confusions of letters with numbers
+# we will handle when interpreting the results
+
+# ignore parentheses
+Y <- gsub('[\\(\\)]', '', Y)
+# allowed confusions
+fuzz <- c('I', '1',
+          'l', '1',
+          'O', '0',
+          'b', '6',
+          'g', '9')
+i <- 1
+while (i < length(fuzz))
+{
+  Y <- gsub(fuzz[i], fuzz[i+1], Y)
+  i <- i + 2
+}
+
+
+# we only need to classify relevent letters and nunmbers
+month_names <- c('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')
+relevant_strs <- character(0)
+for (m in month_names)
+  for (n in 1:3) relevant_strs <- c(relevant_strs, ngram(m, n))
+relevant_strs <- unique(relevant_strs)
+relevant_strs <- c(0:9, ',', relevant_strs)
+incl <- (Y %in% relevant_strs)
+
+X <- X[incl,,]
+Y <- Y[incl]
+
 
 # crop X as possible
 i1 <- +Inf
@@ -82,7 +106,7 @@ random_plot(X_te, Y_te)
 
 
 p <- Pipeline(fl=Flatten(),
-              #pc=PCA(50),
+              pc=PCA(50),
               ml=MLP(hidden=c(50,50), output='softmax'))
 
 
@@ -101,7 +125,7 @@ accuracy(p)
 result <- as.data.frame(accuracy(p))
 consec_perfect <- 0
 success <- FALSE
-for (i in 1:2000)
+for (i in 1:5000)
 {
   newdata <- generate_augmented_data(1000, X, Y)
 
@@ -131,7 +155,7 @@ if (!success) {
 } else {
   # save the pretrained model
   p$input_size <- dim(X)[2:3]
-  saveRDS(p, 'train/outcome/caption-ja-classifier.rds')
+  saveRDS(p, 'train/outcome/caption-en-classifier.rds')
 }
 
 
