@@ -4,17 +4,20 @@
 \alias{plot.kgschart}
 \title{Plot Method for kgschart object}
 \usage{
-\method{plot}{kgschart}(x, y = NULL, ...)
+\method{plot}{kgschart}(x, y = NULL, image = FALSE, ...)
 }
 \arguments{
-\item{x}{object}
+\item{x}{\code{kgschart} class object}
 
 \item{y}{not in use}
+
+\item{image}{if TRUE, plot the image, otherwise plot the data}
 
 \item{...}{not in use}
 }
 \value{
-\code{gtable} object
+\code{gtable} object if \code{image} is TRUE,
+\code{ggplot} object otherwise
 }
 \description{
 Plot Method for kgschart object

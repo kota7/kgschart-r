@@ -4,10 +4,12 @@
 \alias{kgschart}
 \title{KGS Rank Graph Parser}
 \usage{
-kgschart(src, ...)
+kgschart(src, keep_image = TRUE, ...)
 }
 \arguments{
 \item{src}{png file name}
+
+\item{keep_image}{if TRUE, keep image arrays, otherwise discarded}
 
 \item{...}{other arguments for \code{png::readPNG}}
 }
