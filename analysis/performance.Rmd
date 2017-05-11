@@ -1,0 +1,23 @@
+---
+title: "Speed analysis using lineprof"
+output: html_notebook
+---
+
+```{r}
+library(lineprof)
+library(kgschart)
+l <- lineprof(kgschart(system.file("extdata/leela-ja_JP.png",
+                                   package = "kgschart")))
+l
+```
+
+It seems the slowest function is "rgb_dist" function.
+
+This function is a single line function as below.
+If we can optimize this function, the overall process will become much more efficient.
+```{r}
+kgschart:::rgb_dist
+```
+
+
+
