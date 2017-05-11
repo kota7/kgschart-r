@@ -13,6 +13,9 @@ knitr::opts_chunk$set(
 ```
 
 
+[![Build Status](https://travis-ci.org/kota7/kgschart-r.svg?branch=master)](https://travis-ci.org/kota7/kgschart-r)
+
+
 kgschart
 ========
 R package for parsing KGS rank graphs into numeric data
