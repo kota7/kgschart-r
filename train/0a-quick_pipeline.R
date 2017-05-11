@@ -22,11 +22,15 @@ PCA <- function(n, ...)
   {
     # set retx=FALSE, to avoid keeping the rotated data inside
     if (is.null(model)) model <<- stats::prcomp(data$x, retx=FALSE, ...)
+
+    # to save storage, cut the rotation matrix above the required size (n)
+    model$rotation <<- model$rotation[, 1:n]
   }
 
   transform <- function(data)
   {
-    data$x <- predict(model, data$x)[, 1:n]
+    #data$x <- predict(model, data$x)[, 1:n]
+    data$x <- scale(data$x, model$center, model$scale) %*% model$rotation
     data
   }
 
