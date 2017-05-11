@@ -1,6 +1,7 @@
 analysis
 train
 data-raw
+.travis.yml
 
 ^.*\.Rproj$
 ^\.Rproj\.user$
