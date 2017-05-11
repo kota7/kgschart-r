@@ -31,8 +31,20 @@ rgb_dist <- function(arr, color)
   #   with weight [2,4,9]
   #   https://en.wikipedia.org/wiki/Color_difference
 
-  apply(((arr-color)^2)*c(2/9, 4/9, 3/9),
-        FUN=sum, MARGIN=c(2,3))^0.5
+  stopifnot(is.array(arr))
+  stopifnot(length(dim(arr))==3)
+  stopifnot(dim(arr)[1]==3)
+
+  if (length(color)!=3) color <- rep(color, length=3)
+
+  R <- 2/9*((arr[1,,] - color[1])^2)
+  G <- 4/9*((arr[2,,] - color[2])^2)
+  B <- 3/9*((arr[3,,] - color[3])^2)
+  sqrt(R+G+B)
+
+  # old implementation, slower
+  #apply(((arr-color)^2)*c(2/9, 4/9, 3/9),
+  #      FUN=sum, MARGIN=c(2,3))^0.5
 }
 
 
