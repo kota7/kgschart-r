@@ -37,18 +37,18 @@ rgb_dist <- function(arr, color)
 
 
 
-image_plot <- function(arr, plot=FALSE, eps=1e-10)
+image_plot <- function(arr, show=FALSE, eps=1e-10)
 {
   # Create graphic object of an image
   #
   # args:
   #   arr: array of size either (3, nrow, ncol) or (nrow, ncol).
   #        the former is RGB and the latter gray scale
-  #   plot: if TRUE, show image
+  #   show: if TRUE, show image
   #   eps: very small value shifted to avoid rgb range error
   #
   # returns:
-  #   grid::rastergrob
+  #   ggplot
 
   if (length(dim(arr))==3) {
     # change to channel-last order
@@ -66,10 +66,13 @@ image_plot <- function(arr, plot=FALSE, eps=1e-10)
   }
   out <- grid::rasterGrob(arr)
 
-  if (plot) {
-    grid::grid.newpage()
-    grid::grid.draw(out)
-  }
+  # put the graphic on ggplot
+  out <- ggplot2::qplot(0.5, 0.5, xlim=c(0,1), ylim=c(0,1)) +
+    ggplot2::theme_void() + ggplot2::xlab('') + ggplot2::ylab('') +
+    ggplot2::annotation_custom(out)
+
+  if (show) plot(out)
+
   invisible(out)
 }
 

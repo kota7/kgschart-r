@@ -101,9 +101,10 @@ random_plot <- function(X, Y, Y2=NULL)
   grob_list <- lapply(index, function(i) {
     label <- Y[i]
     if (!is.null(Y2)) label <- paste(label, Y2[i], sep='/')
-    qplot(0.5, 0.5, xlim=c(0,1), ylim=c(0,1)) +
-      theme_void() + xlab('') + ylab('') +
-      annotation_custom(kgschart:::image_plot(X[i,,])) +
+    #qplot(0.5, 0.5, xlim=c(0,1), ylim=c(0,1)) +
+      #theme_void() + xlab('') + ylab('') +
+      #annotation_custom(kgschart:::image_plot(X[i,,])) +
+    kgschart:::image_plot(X[i,,]) +
       geom_text(aes(x, y, label=label),
                 data=data.frame(x=0.1, y=1, label=label))
   })

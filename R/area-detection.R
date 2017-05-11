@@ -6,8 +6,9 @@ detect_graph_area <- function(arr)
   #   arr: array of size (3, nrow, ncol)
   #
   # returns:
-  #   vector of size 4
-  #   [1,0,1,0] if a graph is not detected
+  #   vector of size 4 of (top, bottom, left, right) location
+  #   these are indices of enclosing box of the graph
+  #   [1,0,1,0] if no graph is detected
 
   thres_dist <- 0.05
   distance <- rgb_dist(arr[,,dim(arr)[3] %/% 2, drop=FALSE],

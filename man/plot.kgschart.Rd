@@ -2,24 +2,27 @@
 % Please edit documentation in R/kgschart.R
 \name{plot.kgschart}
 \alias{plot.kgschart}
-\title{Plot Method for kgschart object}
+\title{Plot method for kgschart object}
 \usage{
-\method{plot}{kgschart}(x, y = NULL, image = FALSE, ...)
+\method{plot}{kgschart}(x, y = NULL, image = FALSE, separate = FALSE, ...)
 }
 \arguments{
 \item{x}{\code{kgschart} class object}
 
 \item{y}{not in use}
 
-\item{image}{if TRUE, plot the image, otherwise plot the data}
+\item{image}{if \code{TRUE}, draw the image, otherwise plot the data}
+
+\item{separate}{if \code{TRUE}, and \code{image} is TRUE, draw the image separated by
+component. Useful for debugging.}
 
 \item{...}{not in use}
 }
 \value{
-\code{gtable} object if \code{image} is TRUE,
+\code{gtable} object if \code{image} and \code{separate} are both \code{TRUE},
 \code{ggplot} object otherwise
 }
 \description{
-Plot Method for kgschart object
+Plot data or image
 }
 

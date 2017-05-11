@@ -6,7 +6,7 @@ letters <- list()
 for (fn in dir(datadir, 'png$', recursive=TRUE, full.names=TRUE))
 {
   cat(fn, '\n')
-  x <- kgschart(fn)
+  x <- kgschart(fn, keep_image=TRUE)
   letters <- c(letters, kgschart:::extract_axis_letters(x$yaxis))
 }
 

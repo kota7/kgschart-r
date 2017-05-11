@@ -4,23 +4,26 @@
 \alias{kgschart}
 \title{KGS Rank Graph Parser}
 \usage{
-kgschart(src, keep_image = TRUE, ...)
+kgschart(src, keep_image = FALSE, ...)
 }
 \arguments{
 \item{src}{png file name}
 
-\item{keep_image}{if TRUE, keep image arrays, otherwise discarded}
+\item{keep_image}{if \code{TRUE}, keep image arrays, otherwise discarded}
 
-\item{...}{other arguments for \code{png::readPNG}}
+\item{...}{other arguments for \code{\link[png]{readPNG}}}
 }
 \value{
 \code{kgschart} class object
 }
 \description{
-KGS Rank Graph Parser
+Restore underlining data from a KGS Rank Graph
 }
 \examples{
 x <- kgschart(system.file("extdata/leela-ja_JP.png",
                           package = "kgschart"))
+head(x$data)
+\dontrun{
+plot(x)}
 }
 

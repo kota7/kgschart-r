@@ -1,11 +1,10 @@
 Package: kgschart
 Type: Package
 Title: KGS Rank Graph Parser
-Version: 0.1.0
-Author: Kota Mori
+Version: 0.1.1
+Author: Kota Mori <kmori05@gmail.com>
 Maintainer: Kota Mori <kmori05@gmail.com>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Restore underlining data from a KGS rank graph.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Depends: R (>= 2.10)

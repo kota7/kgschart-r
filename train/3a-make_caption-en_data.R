@@ -9,7 +9,7 @@ for (d in file.path(datadir, c('batch3-en', 'batch4-en')))
   for (fn in dir(d, 'png$', recursive=TRUE, full.names=TRUE))
   {
     cat(fn, '\n')
-    x <- kgschart(fn)
+    x <- kgschart(fn, keep_image=TRUE)
     letters <- c(letters, kgschart:::extract_caption_letters(x$caption))
   }
 }
