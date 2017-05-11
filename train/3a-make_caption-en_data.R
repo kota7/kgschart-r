@@ -5,7 +5,8 @@ datadir <- 'train/data/images/'
 savedir <- 'train/data/caption-en/'
 if (!dir.exists(savedir)) dir.create(savedir)
 letters <- list()
-for (d in file.path(datadir, c('batch3-en', 'batch4-en', 'batch5-en')))
+for (d in file.path(datadir, c('batch3-en', 'batch4-en',
+                               'batch5-en', 'batch6-en')))
 {
   for (fn in dir(d, 'png$', recursive=TRUE, full.names=TRUE))
   {
@@ -31,7 +32,7 @@ targetsize <- ceiling(maxsize * 1.2)
 
 letters <- lapply(letters, kgschart:::pad_crop_image,
                   target_rows=targetsize[1], target_cols=targetsize[2], value=1)
-grobs <- lapply(letters, kgschart:::image_plot)
-plot(gridExtra::arrangeGrob(grobs=grobs))
+#grobs <- lapply(letters, kgschart:::image_plot)
+#plot(gridExtra::arrangeGrob(grobs=grobs))
 
 dput(letters, file.path(savedir, 'X'))
