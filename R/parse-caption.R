@@ -31,9 +31,9 @@ get_time_range <- function(x)
 
 
   tmp <- stringr::str_match_all(
-    cap, '([0-9]{2}/[0-9]{2}/[0-9]{2})[^0-9]*([0-9]{2}:[0-9]{2}){0,1}')[[1]]
+    cap, '([0-9]{2}/[0-9]{2}/[0-9]{2})[^0-9]*([0-9]{1,2}:[0-9]{1,2}){0,1}')[[1]]
   if (nrow(tmp) >= 2) {
-    tmp <- tail(tmp, 2)
+    tmp <- utils::tail(tmp, 2)
     tmp[is.na(tmp[,3]),3] <- '00:00'
     s <- paste(tmp[,2], tmp[,3], sep=' ')
     out <- as.POSIXct(s, format='%y/%m/%d %H:%M', tz='UTC')
@@ -55,7 +55,7 @@ get_time_range <- function(x)
   tmp <- stringr::str_match_all(
     cap, '([A-Za-z0-9]{3})([0-9]{1,2}),([0-9]{4})')[[1]]
   if (nrow(tmp) >= 2) {
-    tmp <- tail(tmp, 2)
+    tmp <- utils::tail(tmp, 2)
     yr <- as.integer(tmp[,4])
     dy <- as.integer(tmp[,3])
     mt <- tmp[,2]

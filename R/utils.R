@@ -71,7 +71,7 @@ image_plot <- function(arr, show=FALSE, eps=1e-10)
     ggplot2::theme_void() + ggplot2::xlab('') + ggplot2::ylab('') +
     ggplot2::annotation_custom(out)
 
-  if (show) plot(out)
+  if (show) graphics::plot(out)
 
   invisible(out)
 }
@@ -110,8 +110,8 @@ detect_consecutive_true <- function(arr)
   stopifnot(is.logical(arr))
   if (length(arr)==0) return(NULL)
   L <- length(arr)
-  start <- which(arr & !c(FALSE, head(arr, L-1)))
-  end <- which(arr & !c(tail(arr, L-1), FALSE))
+  start <- which(arr & !c(FALSE, utils::head(arr, L-1)))
+  end <- which(arr & !c(utils::tail(arr, L-1), FALSE))
   stopifnot(length(start) == length(end))
   cbind(start, end)
 }

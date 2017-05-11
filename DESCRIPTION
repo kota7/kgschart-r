@@ -1,7 +1,7 @@
 Package: kgschart
 Type: Package
 Title: KGS Rank Graph Parser
-Version: 0.1.1
+Version: 0.1.2
 Author: Kota Mori <kmori05@gmail.com>
 Maintainer: Kota Mori <kmori05@gmail.com>
 Description: Restore underlining data from a KGS rank graph.
@@ -12,6 +12,7 @@ Imports:
     abind,
     deepnet,
     ggplot2,
+    graphics,
     grid,
     gridExtra,
     magrittr,
@@ -19,6 +20,7 @@ Imports:
     png,
     stats,
     stringr,
+    utils
 LazyData: true
 RoxygenNote: 5.0.1
 Suggests: testthat

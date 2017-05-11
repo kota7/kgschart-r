@@ -38,7 +38,7 @@ kgschart <- function(src, keep_image=FALSE, ...)
 
   # initialize output
   out <- list(src=src)
-  if (keep_image) out <- c(out, list(image=image, graph=graph,
+  if (keep_image) out <- c(out, list(image=x, graph=graph,
                                      yaxis=yaxis, caption=caption))
 
   # if not graph, return with data=NULL
@@ -145,7 +145,7 @@ plot.kgschart <- function(x, y=NULL, image=FALSE, separate=FALSE, ...)
         yaxis_grob, caption_grob, graph_grob,
         layout_matrix=matrix(c(1,1,2,3), nrow=2, ncol=2),
         widths=c(1,12), heights=c(1,18))
-      plot(out)
+      graphics::plot(out)
       return(invisible(out))
     } else {
       if (is.null(x$image)) {
@@ -162,7 +162,7 @@ plot.kgschart <- function(x, y=NULL, image=FALSE, separate=FALSE, ...)
     } else {
       out <- ggplot2::ggplot(x$data, ggplot2::aes_string('time', 'rate')) +
         ggplot2::geom_line(size=1)
-      plot(out)
+      graphics::plot(out)
       return(invisible(out))
     }
   }

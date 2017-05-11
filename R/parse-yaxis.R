@@ -152,7 +152,7 @@ get_rank_range <- function(x, label_positions)
   i <- which.max(num_rank)
   max_rank <- num_rank[i] + (i-1L)
   i <- which.min(num_rank)
-  min_rank <- num_rank[i] - (i-length(num_rank))
+  min_rank <- num_rank[i] + (i-length(num_rank))
 
 
   num_to_str_rank(c(min_rank, max_rank))
