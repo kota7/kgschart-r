@@ -3,7 +3,8 @@
 #' Start "KGS Rank Graph Parser" applicaiton.
 #' @param ... optional arguments for \code{\link[shiny]{runApp}}
 #' @examples
-#' kgschart_app()
+#' \dontrun{
+#' kgschart_app()}
 #' @export
 kgschart_app <- function(...)
 {

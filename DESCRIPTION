@@ -18,6 +18,7 @@ Imports:
     magrittr,
     nnet,
     png,
+    shiny,
     stats,
     stringr,
     utils
@@ -25,4 +26,5 @@ LazyData: true
 RoxygenNote: 5.0.1
 Suggests: 
     jsonlite,
+    shinyjs,
     testthat

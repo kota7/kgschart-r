@@ -13,6 +13,7 @@ kgschart_app(...)
 Start "KGS Rank Graph Parser" applicaiton.
 }
 \examples{
-kgschart_app()
+\dontrun{
+kgschart_app()}
 }
 
