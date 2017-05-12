@@ -62,6 +62,9 @@ get_time_range <- function(x)
     # resolve fuzziness in month names
     if (is.matrix(caption_en_classifier$fuzzy)) {
       for (i in 1:nrow(caption_en_classifier$fuzzy))
+        if (caption_en_classifier$fuzzy[i,1] == 'I') next
+        # this is to avoid confusion betwen I and l.
+        # luckily, we can skip I since I is not used as month name
         mt <- gsub(caption_en_classifier$fuzzy[i,2],
                    caption_en_classifier$fuzzy[i,1],
                    mt)
