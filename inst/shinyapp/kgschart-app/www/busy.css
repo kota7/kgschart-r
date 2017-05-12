@@ -1,0 +1,14 @@
+.busy { 
+  position:absolute;
+  top: 40%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -50px;
+  display:none;
+  background: #000000;
+  background: rgba(230, 230, 230, .9);
+  text-align: center;
+  padding: 20px 30px 40px 30px;
+  border-radius: 5px;
+  z-index:100;
+}

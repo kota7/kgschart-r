@@ -9,6 +9,17 @@ library(shiny)
 
 shinyUI(fluidPage(
 
+  tagList(
+    tags$head(
+      tags$link(rel="stylesheet", type="text/css",href="busy.css"),
+      tags$script(type="text/javascript", src = "busy.js")
+    )
+  ),
+  div(class = "busy",  
+      p("Please wait..."), 
+      img(src="ajaxloaderq.gif")
+  ),
+  
   # Application title
   titlePanel("KGS Rank Graph Parser"),
 
@@ -21,6 +32,7 @@ shinyUI(fluidPage(
       textInput('input_id', 'or type in a player name'),
       
       actionButton('load_btn', 'load')
+      
       
     ),
     

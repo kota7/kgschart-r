@@ -8,6 +8,7 @@
 library(shiny)
 library(kgschart)
 
+
 shinyServer(function(input, output) {
 
   
@@ -35,7 +36,7 @@ shinyServer(function(input, output) {
     id <- input$input_id
     print(id)
     # is this valid ID?
-    if (!(nchar(id)>0 && grepl('^[a-zA-Z][a-zA-Z0-9]+$', id))) {
+    if (!(nchar(id)>0 && grepl('^[a-zA-Z][a-zA-Z0-9]*$', id))) {
       showNotification('invalid ID!')
       return()
     }
