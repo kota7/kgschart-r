@@ -17,7 +17,7 @@ kgschart(src, keep_image = FALSE, ...)
 \code{kgschart} class object
 }
 \description{
-Restore underlining data from a KGS Rank Graph
+Parse a KGS rank graph and recover undelining numeric data.
 }
 \examples{
 x <- kgschart(system.file("extdata/leela-ja_JP.png",

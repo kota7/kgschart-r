@@ -1,7 +1,7 @@
 
 #' KGS Rank Graph Parser
 #'
-#' Restore underlining data from a KGS Rank Graph
+#' Parse a KGS rank graph and recover undelining numeric data.
 #' @param src png file name
 #' @param keep_image if \code{TRUE}, keep image arrays, otherwise discarded
 #' @param ... other arguments for \code{\link[png]{readPNG}}

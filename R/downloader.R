@@ -2,7 +2,7 @@
 #'
 #' Access KGS server and download the latest rank graph of the specified player.
 #' Requires internet connection.
-#' Returns the path to the downloaded file in succeeded.
+#' Returns the path to the downloaded file if succeeded.
 #'
 #' @param id KGS ID
 #' @param dst destination file path or directory

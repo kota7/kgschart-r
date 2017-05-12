@@ -1,7 +1,7 @@
 Package: kgschart
 Type: Package
 Title: KGS Rank Graph Parser
-Version: 1.2.1
+Version: 1.2.2
 Authors@R: c(
     person("Kota", "Mori", , "kmori05@gmail.com", c("aut", "cre"))
     )

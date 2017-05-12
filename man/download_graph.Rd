@@ -27,7 +27,7 @@ path to the saved file
 \description{
 Access KGS server and download the latest rank graph of the specified player.
 Requires internet connection.
-Returns the path to the downloaded file in succeeded.
+Returns the path to the downloaded file if succeeded.
 }
 \details{
 Default setting downloads the English version. Another good option is
