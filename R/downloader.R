@@ -8,13 +8,13 @@
 #' @param dst destination file path or directory
 #' @param lang language code, a lower case character of length 2
 #' @param country country code, an upper case character of length 2
-#' @param method method to be used for downloading files. See \code{\link[base]{download.file}} for details
-#' @param ... optional arguments for \code{\link[base]{download.file}} other than
+#' @param method method to be used for downloading files. See \code{\link[utils]{download.file}} for details
+#' @param ... optional arguments for \code{\link[utils]{download.file}} other than
 #' \code{method} and \code{mode}
 #'
 #' @details Default setting downloads the English version. Another good option is
 #' to set \code{lang='ja'} and \code{country='JP'}, which downloads the Japanese version.
-#' @seealso \code{\link[base]{download.file}}
+#' @seealso \code{\link[utils]{download.file}}
 #' @return path to the saved file
 #' @export
 #' @examples

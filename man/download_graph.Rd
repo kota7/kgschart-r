@@ -16,9 +16,9 @@ download_graph(id, dst = tempfile(), lang = "en", country = "US",
 
 \item{country}{country code, an upper case character of length 2}
 
-\item{method}{method to be used for downloading files. See \code{\link[base]{download.file}} for details}
+\item{method}{method to be used for downloading files. See \code{\link[utils]{download.file}} for details}
 
-\item{...}{optional arguments for \code{\link[base]{download.file}} other than
+\item{...}{optional arguments for \code{\link[utils]{download.file}} other than
 \code{method} and \code{mode}}
 }
 \value{
@@ -41,6 +41,6 @@ plot.new()
 rasterImage(p,0,0,1,1)}
 }
 \seealso{
-\code{\link[base]{download.file}}
+\code{\link[utils]{download.file}}
 }
 
