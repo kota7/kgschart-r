@@ -2,6 +2,7 @@
 
 S3method(plot,kgschart)
 S3method(print,kgschart)
+export(download_graph)
 export(kgschart)
 importFrom(deepnet,nn.predict)
 importFrom(deepnet,nn.train)
