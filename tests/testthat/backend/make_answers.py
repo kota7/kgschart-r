@@ -10,13 +10,18 @@ from matplotlib import pyplot as plt
 
 if __name__ == '__main__':
     d = os.path.dirname(__file__)
-    savedir = os.path.abspath(os.path.join(d, '../'))
-    print('files will be saved in:', savedir)
+    
+    # change here #############
+    file_dir = '3'
+    answer_file = 'ans-3.json'
+    ###########################
+    files_dir = os.path.join(d, file_dir)
+    
     
     plt.plot(1)
     plt.show(block=False)
     out = []
-    for fn in glob(os.path.join(savedir, '*.png')):
+    for fn in glob(os.path.join(file_dir, '*.png')):  
         x = np.asarray(Image.open(fn))
         plt.imshow(x)
         plt.draw()
@@ -42,7 +47,7 @@ if __name__ == '__main__':
                 out.append(tmp)
                 break
 
-    with open(os.path.join(savedir, 'answers.json'), 'w') as f:
+    with open(answer_file, 'w') as f:
         json.dump(out, f, indent=2)
 
 
