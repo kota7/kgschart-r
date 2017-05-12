@@ -1,7 +1,7 @@
 kgschart
 ================
 
-`kgschart` is an R package for parsing KGS rank graphs into numeric data. It reads pixel information to recover the data behind the line plot, and identifies approproate axis scales by reading labels and captions. A web application for using the package functionality is also published ([Link](https://kota.shinyapps.io/kgschart-app/)).
+`kgschart` is an R package for parsing KGS rank graphs into numeric data. It reads pixel information to recover the data behind the line plot, and identifies approproate axis scales by reading labels and captions. A [web application](https://kota.shinyapps.io/kgschart-app/) for using the package functionality is also published on shinyapp.io.
 
 Installation
 ------------

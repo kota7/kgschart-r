@@ -31,7 +31,8 @@ devtools::install_github("kota7/kgschart-r")
 
 ## Usage
 
-See 
+See [documentation](https://kota7.github.io/kgschart-r/).
+
 
 ## Links
 

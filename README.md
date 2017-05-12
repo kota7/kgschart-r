@@ -15,3 +15,14 @@ This package is not on CRAN yet. Install it from the GitHub repository.
 ``` r
 devtools::install_github("kota7/kgschart-r")
 ```
+
+Usage
+-----
+
+See [documentation](https://kota7.github.io/kgschart-r/).
+
+Links
+-----
+
+-   [Web app](https://kota.shinyapps.io/kgschart-app/)
+-   [Python version](https://github.com/kota7/kgschart)
