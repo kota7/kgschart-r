@@ -12,16 +12,21 @@ shinyServer(function(input, output) {
 
   
   RV <- reactiveValues(
-    current_file = NULL
+    object = NULL # store parsed object here
   )
   
   # when new input file is loaded, then update the source image
   observeEvent(input$input_file, {
-    RV$current_file <- isolate(input$input_file$datapath)
+    
+    # show image 
     output$src_image <- renderImage({
       list(alt='source image', height='400px', width='auto',
            src=isolate(input$input_file$datapath))
     }) 
+    
+    # parse and store the result
+    RV$object <- kgschart(isolate(input$input_file$datapath))
+      
   })
   
   # when load/fetch button is clicked, then retrieve image file from server
@@ -41,19 +46,20 @@ shinyServer(function(input, output) {
       return()
     }
     
-    RV$current_file <- fn
+    # show image
     output$src_image <- renderImage({
       list(alt='source image', height='400px', width='auto', src=fn)
     }) 
+    
+    # parse and store object
+    RV$object <- kgschart(fn)
   })
   
+  
   observeEvent(input$parse_btn, {
-    if (!file.exists(RV$current_file)) return(NULL)  
-    output$parsed_plot <- renderPlot({
-      print("hey")
-      x <- kgschart(isolate(RV$current_file))
-      plot(x)
-    })
+    if (is.null(isolate(RV$object))) return()
+    
+    output$parsed_plot <- renderPlot({ plot(isolate(RV$object)) })
   })
   
 })
