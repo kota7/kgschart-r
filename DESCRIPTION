@@ -2,10 +2,13 @@ Package: kgschart
 Type: Package
 Title: KGS Rank Graph Parser
 Version: 1.2.1
-Author: Kota Mori <kmori05@gmail.com>
-Maintainer: Kota Mori <kmori05@gmail.com>
-Description: Restore underlining data from a KGS rank graph.
+Authors@R: c(
+    person("Kota", "Mori", , "kmori05@gmail.com", c("aut", "cre"))
+    )
+Description: Recover underlining data from a KGS rank graph.
 License: MIT + file LICENSE
+URL: https://github.com/kota7/kgschart
+BugReports: https://github.com/kota7/kgschart/issues
 Encoding: UTF-8
 Depends: R (>= 2.10)
 Imports:
