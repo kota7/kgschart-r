@@ -43,10 +43,16 @@ get_num_grids <- function(x)
   stopifnot(length(dim(x)) == 3)
   stopifnot(dim(x)[1] == 3)
 
-  thres_dist <- 0.2
+  thres_dist <- 0.1
   thres_frac <- 0.9
-  mostly_gray <- (rgb_dist(x, .GRAY) < thres_dist)
-  frac <- apply(mostly_gray, MARGIN=1, FUN=mean)
+
+  # mostly_gray <- (rgb_dist(x, .GRAY) < thres_dist)  |
+  #                (rgb_dist(x, .DGRAY) < thres_dist) |
+  #                (rgb_dist(x, .LGRAY) < thres_dist)
+  mostly_gray <- (pmin(rgb_dist(x, .GRAY), rgb_dist(x, .DGRAY),
+                       rgb_dist(x, .LGRAY)) < thres_dist)
+  frac <- rowMeans(mostly_gray)
+    #apply(mostly_gray, MARGIN=1, FUN=mean)
   gray_index <- which(frac > thres_frac)
 
   if (length(gray_index) == 0) return(0L)
