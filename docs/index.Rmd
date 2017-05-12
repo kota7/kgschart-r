@@ -1,0 +1,73 @@
+---
+title: "kgschart"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+`kgschart` is an R package for parsing KGS rank graphs into numeric data.
+It reads pixel information to recover the data behind the line plot, and identifies approproate axis scales by reading labels and captions.
+A web application for using the package functionality is also published ([Link](https://kota.shinyapps.io/kgschart-app/)). 
+
+## Installation
+
+This package is not on CRAN yet. Install it from the GitHub repository. 
+
+```R
+devtools::install_github("kota7/kgschart-r")
+```
+
+
+## Usage
+
+### Main functionality
+
+The main function of the package is also named `kgschart`.  It takes an image file  (png format) and parse the graph in it.
+The parsed data are stored in `x$data` as a `data.frame` with two columns, `time` and `rate`.  Use `write.csv` or other method for exporting the data.
+The object supports `plot` method, which displays a line plot similar to the source image.
+
+```{r}
+library(kgschart)
+x <- kgschart(system.file("extdata/kotakun-en_US.png", package = "kgschart"))
+head(x$data)
+plot(x)
+```
+
+
+To see the source image file, set `keep_image` option.  Then, the original image data is stored in the object, and can be shown by `plot` function with `image` option. 
+```{r}
+x <- kgschart(system.file("extdata/kotakun-en_US.png", package = "kgschart"),
+              keep_image=TRUE)
+plot(x, image=TRUE)
+```
+
+
+### Rank graph downloader
+
+If the image file has not been downloaded yet, but the player id is known, then use `download_graph` function.  It retrieves the latest graph of a specified player, and return the downloaded file path.
+
+```{r}
+f <- download_graph('Zen19L')
+y <- kgschart(f)
+plot(y)
+```
+
+
+### Shiny app
+
+`kgschart_app` function launches the browser applicaiton locally.  The app is also published on [shinyapps.io](https://kota.shinyapps.io/kgschart-app/).
+
+```{r, eval=FALSE}
+kgschart_app()
+```
+
+
+
+
+## Links
+
+- [Web app](https://kota.shinyapps.io/kgschart-app/)
+- [Python version](https://github.com/kota7/kgschart)

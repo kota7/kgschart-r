@@ -29,3 +29,11 @@ This package is not on CRAN yet. Install it from the GitHub repository.
 devtools::install_github("kota7/kgschart-r")
 ```
 
+## Usage
+
+See 
+
+## Links
+
+- [Web app](https://kota.shinyapps.io/kgschart-app/)
+- [Python version](https://github.com/kota7/kgschart)
