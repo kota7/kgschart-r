@@ -8,7 +8,9 @@
 library(shiny)
 
 shinyUI(fluidPage(
-
+  
+  # reference
+  # https://gist.github.com/withr/8799489 
   tagList(
     tags$head(
       tags$link(rel="stylesheet", type="text/css",href="busy.css"),
@@ -29,19 +31,42 @@ shinyUI(fluidPage(
       fileInput('input_file', 'Choose PNG File',
                 accept=c('image/png')),
       
-      textInput('input_id', 'or type in a player name'),
+      div(style="display: inline-block; vertical-align:middle",
+          textInput('input_id', 'Or type in a player name')),
+      div(style="display: inline-block;vertical-align:middle; width:10px",
+          shiny::br()),
+      div(style="display: inline-block; vertical-align:-30%;",
+          actionButton('load_btn', 'Load')),
       
-      actionButton('load_btn', 'load')
+      shiny::hr(),
       
+      shiny::strong('Rank range:'),
+      shiny::tags$ul(
+        shiny::tags$li(textOutput('rank_range')), 
+        style='list-style: none;'
+      ),
       
+      shiny::strong('Period:'),
+      shiny::tags$ul(
+        shiny::tags$li(textOutput('time_range')), 
+        style='list-style: none;'
+      ),
+      
+      downloadButton('dl_btn', 'Download Data'),
+      
+      shiny::hr(),
+      shiny::a('Bug Report', 
+        href='https://github.com/kota7/kgschart-r/issues',
+        target='_blank')
     ),
     
 
     # Show a plot of the generated distribution
     mainPanel(
-      imageOutput('src_image'),
-      actionButton('parse_btn', 'Parse!'),
-      plotOutput("parsed_plot")
+      imageOutput('src_image', width='504px', height='378px'),
+      shiny::br(),
+      #actionButton('parse_btn', 'Parse!'),
+      plotOutput("parsed_plot", width='525px', height='336px')
     )
   )
 ))
