@@ -25,6 +25,7 @@ Imports:
 LazyData: true
 RoxygenNote: 5.0.1
 Suggests: 
+    devtools,
     jsonlite,
     shinyjs,
     testthat

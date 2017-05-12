@@ -1,0 +1,10 @@
+name: kgs_rank_graph_parser
+title: kgschart-app
+account: kota
+server: shinyapps.io
+appId: 180194
+bundleId: 825972
+url: https://kota.shinyapps.io/kgs_rank_graph_parser/
+when: 1494604273.0812
+asMultiple: FALSE
+asStatic: FALSE
