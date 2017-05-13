@@ -174,320 +174,97 @@ $(document).ready(function () {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShsaW5lcHJvZilcbmxpYnJhcnkoa2dzY2hhcnQpXG5sIDwtIGxpbmVwcm9mKGtnc2NoYXJ0KHN5c3RlbS5maWxlKFwiZXh0ZGF0YS9sZWVsYS1qYV9KUC5wbmdcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFja2FnZSA9IFwia2dzY2hhcnRcIikpKVxubFxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShsaW5lcHJvZilcbmxpYnJhcnkobWljcm9iZW5jaG1hcmspXG5saWJyYXJ5KGtnc2NoYXJ0KVxubCA8LSBsaW5lcHJvZihrZ3NjaGFydChzeXN0ZW0uZmlsZShcImV4dGRhdGEvbGVlbGEtamFfSlAucG5nXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhY2thZ2UgPSBcImtnc2NoYXJ0XCIpKSlcbmxcbmBgYCJ9 -->
 <pre class="r"><code>library(lineprof)
+library(microbenchmark)
 library(kgschart)
 l &lt;- lineprof(kgschart(system.file(&quot;extdata/leela-ja_JP.png&quot;,
                                    package = &quot;kgschart&quot;)))
 l</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUmVkdWNpbmcgZGVwdGggdG8gMiAoZnJvbSAyMClcbiJ9 -->
-<pre><code>Reducing depth to 2 (from 20)</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiUmVkdWNpbmcgZGVwdGggdG8gMiAoZnJvbSAyMylcbiJ9 -->
+<pre><code>Reducing depth to 2 (from 23)</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICB0aW1lIGFsbG9jIHJlbGVhc2UgZHVwc1xuMSAgIDAuMjA2IDAuMDMxICAgMC4wMDAgICAyNlxuMiAgIDEuMTgwIDAuOTg5ICAgMC4wMDAgICAgMFxuMyAgIDAuMDAxIDAuMDAwICAgMC4wMDAgICAgMFxuNCAgIDAuMDA1IDAuMDAyICAgMC4wMDAgICAgMVxuNSAgIDIuMTc0IDAuODc5ICAgMC4wMDAgICAgMFxuNiAgIDAuMDAxIDAuMDAwICAgMC4wMDAgICAgMFxuNyAgIDAuMDAxIDAuMDAxICAgMC4wMDAgICAgMFxuOCAgIDAuMDE4IDAuMDU3ICAgMC4wMDAgICAzNlxuOSAgIDEuMTUwIDAuNzQ2ICAgMC4wMDAgICAgMFxuMTAgIDAuMDAxIDAuMDAxICAgMC4wMDAgICAgMFxuMTEgIDAuMTgxIDAuMDY4ICAgMC4wMDAgICAgMFxuMTIgIDAuMDA0IDAuMDA0ICAgMC4wMDAgICAgNFxuMTMgIDAuMDAxIDAuMDAyICAgMC4wMDAgICAgMlxuMTQgIDAuMDA0IDAuMDE5ICAgMC4wMDAgICAxMlxuMTUgIDEuNjk3IDEuMjUwICAgMC4wMDAgICAxOFxuMTYgIDAuODEyIDAuMTI0ICAgMi4xNjEgICAgMFxuMTcgIDAuNDQ3IDAuMjQ3ICAgMC4wMDAgICAgMVxuMTggIDAuODI3IDEuMTI3ICAgMC4wMDAgIDYyNFxuMTkgIDAuMDAxIDAuMDAyICAgMC4wMDAgICAgMFxuMjAgIDIuMDc2IDMuMDk4ICAgMC4wMDAgIDYyNVxuMjEgIDAuMDAxIDAuMDAwICAgMC4wMDAgICAgMlxuMjIgIDAuMDAxIDAuMDAxICAgMC4wMDAgICAgMFxuMjMgIDAuMDA0IDAuMDA4ICAgMC4wMDAgICAgNlxuMjQgIDAuMDAxIDAuMDAyICAgMC4wMDAgICAgNlxuMjUgIDAuMDAyIDAuMDAzICAgMC4wMDAgICAgNVxuMjYgIDAuMDAxIDAuMDAyICAgMC4wMDAgICAgMVxuMjcgIDIuODgxIDEuMDEwICAgNC4zNzkgICAxOFxuMjggIDAuMDAxIDAuMDAwICAgMC4wMDAgICAgMFxuMjkgIDAuMTYxIDAuMTI0ICAgMC4wMDAgICAgMFxuMzAgIDAuMDAxIDAuMDAxICAgMC4wMDAgICAgMFxuMzEgIDEuMzQyIDEuNTk2ICAgMC4wMDAgIDQyNlxuMzIgIDAuMDAxIDAuMDAxICAgMC4wMDAgICAgMFxuMzMgIDAuMDAxIDAuMDAxICAgMC4wMDAgICAgMFxuMzQgIDAuMDAzIDAuMDA2ICAgMC4wMDAgICAgM1xuMzUgIDAuMDAzIDAuMDA0ICAgMC4wMDAgICAgMlxuMzYgIDAuMDAxIDAuMDAxICAgMC4wMDAgICAgMFxuMzcgIDAuMDAxIDAuMDAzICAgMC4wMDAgICAgMVxuMzggIDAuMDAzIDAuMDEyICAgMC4wMDAgICAxMlxuMzkgIDAuOTI2IDQuMTQ0ICAgMC4wMDAgMTQxM1xuNDAgIDAuMDE0IDAuMDE5ICAgMC4wMDAgICAgNlxuNDEgIDAuMDAxIDAuMDAyICAgMC4wMDAgICAgMlxuNDIgIDAuMDA0IDAuMDA4ICAgMC4wMDAgICAgM1xuNDMgIDAuMDAxIDAuMDEwICAgMC4wMDAgICAgMVxuNDQgIDAuMDAxIDAuMDA2ICAgMC4wMDAgICAxMVxuNDUgMTMuMDI1IDYuODM2ICAxMy41MzEgMTIwN1xuNDYgIDAuMDAxIDAuMDAxICAgMC4wMDAgICAgMFxuNDcgIDAuNTE5IDEuNzY0ICAgMC4wMDAgIDk0NVxuNDggIDAuMDAxIDAuMDAyICAgMC4wMDAgICAgMFxuNDkgIDAuMDAyIDAuMDAzICAgMC4wMDAgICAgMlxuNTAgIDAuMDEzIDAuMDA3ICAgMC4wMDAgICAgMVxuNTEgIDAuMDAzIDAuMDA2ICAgMC4wMDAgICAgMlxuNTIgIDAuMDA3IDAuMDExICAgMC4wMDAgICAgOFxuNTMgIDAuMDAxIDAuMDAyICAgMC4wMDAgICAgMlxuNTQgIDAuMDAxIDAuMDAyICAgMC4wMDAgICAgMFxuNTUgIDAuMDAxIDAuMDAxICAgMC4wMDAgICAgMFxuNTYgIDAuMDA4IDAuMDE3ICAgMC4wMDAgICAxN1xuNTcgIDAuMDAxIDAuMDAxICAgMC4wMDAgICAgMlxuNTggIDAuMDAxIDAuMDAyICAgMC4wMDAgICAgMFxuNTkgIDAuMDEzIDAuMDMxICAgMC4wMDAgICAxMlxuNjAgIDAuMDAyIDAuMDAzICAgMC4wMDAgICAgNVxuNjEgIDAuMDAxIDAuMDAyICAgMC4wMDAgICAgMVxuNjIgIDAuMDE3IDAuMDQyICAgMC4wMDAgICAzN1xuNjMgIDAuMDAzIDAuMDA3ICAgMC4wMDAgICAgNFxuNjQgIDAuMDAxIDAuMDAyICAgMC4wMDAgICAgMVxuNjUgIDAuMDAyIDAuMDAzICAgMC4wMDAgICAgNFxuNjYgIDAuMDAxIDAuMDAyICAgMC4wMDAgICAgMFxuNjcgIDAuMDAxIDAuMDAzICAgMC4wMDAgICAgMFxuNjggIDAuMDAyIDAuMDA1ICAgMC4wMDAgICAgOVxuNjkgIDAuMDAyIDAuMDAxICAgMC4wMDAgICAgNFxuNzAgIDAuMDEwIDAuMDM4ICAgMC4wMDAgICAyNVxuNzEgIDAuMDAxIDAuMDAyICAgMC4wMDAgICAgM1xuNzIgIDAuMDAyIDAuMDA0ICAgMC4wMDAgICAgMlxuNzMgIDAuMDA3IDAuMDA2ICAgMC4wMDAgICAgMVxuNzQgIDAuMDAzIDAuMDA3ICAgMC4wMDAgICAgM1xuNzUgIDAuMDAyIDAuMDAyICAgMC4wMDAgICAgMVxuNzYgIDAuMDAxIDAuMDAyICAgMC4wMDAgICAgMVxuNzcgIDAuMDAxIDAuMDAxICAgMC4wMDAgICAgMlxuNzggIDAuMDAxIDAuMDAyICAgMC4wMDAgICAgMFxuNzkgIDAuMDAxIDAuMDAyICAgMC4wMDAgICAgMFxuODAgIDAuMDAxIDAuMDAyICAgMC4wMDAgICAgMlxuODEgIDAuMDAxIDAuMDAyICAgMC4wMDAgICAgMlxuODIgIDAuMDAxIDAuMDAxICAgMC4wMDAgICAgMVxuODMgIDAuMDA5IDAuMDI3ICAgMC4wMDAgICAyNVxuODQgIDAuMDAxIDAuMDAxICAgMC4wMDAgICAgMVxuODUgIDAuMDAxIDAuMDAxICAgMC4wMDAgICAgMlxuODYgIDAuMDA3IDAuMDI2ICAgMC4wMDAgICAyMVxuODcgIDAuMDAxIDAuMDAxICAgMC4wMDAgICAgNFxuODggIDAuMDAyIDAuMDAzICAgMC4wMDAgICAgMlxuODkgIDAuMDAxIDAuMDAxICAgMC4wMDAgICAgMVxuOTAgIDAuMDAzIDAuMDA2ICAgMC4wMDAgICAgMlxuOTEgIDAuMDAxIDAuMDAyICAgMC4wMDAgICAgM1xuOTIgIDAuMDAyIDAuMDA1ICAgMC4wMDAgICAgMFxuOTMgIDAuMDAxIDAuMDAyICAgMC4wMDAgICAgNVxuOTQgIDAuMDAxIDAuMDAxICAgMC4wMDAgICAgM1xuOTUgIDAuMDEyIDAuMDA5ICAgMC4wMDAgICAgMlxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZWZcbjEgICBjKFwiPEFub255bW91cz5cIiwgXCJzeXN0ZW0uZmlsZVwiKVxuMiAgICAgICAgIGMoXCI8QW5vbnltb3VzPlwiLCBcIi5DYWxsXCIpXG4zICAgICAgICAgICAgICAgICAgICAgIGNoYXJhY3RlcigwKVxuNCAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiYXBlcm1cIlxuNSAgICAgICBjKFwiYXBlcm1cIiwgXCJhcGVybS5kZWZhdWx0XCIpXG42ICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJhcGVybVwiXG43ICAgICAgICAgICAgICAgICAgICAgIGNoYXJhY3RlcigwKVxuOCAgICAgICAgICAgICAgIGFyZWEtZGV0ZWN0aW9uLlIjMTRcbjkgICAgICAgICAgICAgICAgICAgICAgY2hhcmFjdGVyKDApXG4xMCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiLVwiXG4xMSAgICAgICAgICAgICAgICAgICAgIGNoYXJhY3RlcigwKVxuMTIgICAgICAgICAgICAgICAgIHBhcnNlLWdyYXBoLlIjMTJcbjEzICAgICAgICAgICAgICAgICBwYXJzZS1ncmFwaC5SIzEzXG4xNCAgICAgICAgICAgICAgICAgcGFyc2UtZ3JhcGguUiMxM1xuMTUgICAgICAgICAgICAgICAgIHBhcnNlLWdyYXBoLlIjMTZcbjE2ICAgICAgICAgICAgICAgICBwYXJzZS1ncmFwaC5SIzE5XG4xNyAgICAgICAgICAgICAgICAgcGFyc2UtZ3JhcGguUiMxOVxuMTggICAgICAgICAgICAgICAgIHBhcnNlLWdyYXBoLlIjMjFcbjE5ICAgICAgICAgICAgICAgICBwYXJzZS1ncmFwaC5SIzIyXG4yMCAgICAgICAgICAgICAgICAgcGFyc2UtZ3JhcGguUiMyNFxuMjEgICAgICAgICAgICAgICAgICAgICBjaGFyYWN0ZXIoMClcbjIyICAgICAgICAgICAgICAgICBwYXJzZS1ncmFwaC5SIzQxXG4yMyAgICAgICAgICAgICAgICAgcGFyc2UtZ3JhcGguUiM0MlxuMjQgICAgICAgICAgICAgICAgIHBhcnNlLWdyYXBoLlIjNDRcbjI1ICAgICAgICAgICAgICAgICBwYXJzZS1ncmFwaC5SIzQ0XG4yNiAgICAgICAgICAgICAgICAgcGFyc2UtZ3JhcGguUiM0OFxuMjcgICAgICAgICAgICAgICAgIHBhcnNlLWdyYXBoLlIjNDhcbjI4ICAgICAgICAgICAgICAgICBwYXJzZS1ncmFwaC5SIzQ4XG4yOSAgICAgICAgICAgICAgICAgcGFyc2UtZ3JhcGguUiM0OFxuMzAgICAgICAgICAgICAgICAgIHBhcnNlLWdyYXBoLlIjNDlcbjMxICAgICAgICAgICAgICAgICBwYXJzZS1ncmFwaC5SIzQ5XG4zMiAgICAgICAgICAgICAgICAgcGFyc2UtZ3JhcGguUiM1MFxuMzMgICAgICAgICAgICAgICAgIHBhcnNlLWdyYXBoLlIjNTBcbjM0ICAgICAgICAgICAgICAgICBwYXJzZS1ncmFwaC5SIzUzXG4zNSAgICAgICAgICBjKFwic2VxXCIsIFwic2VxLmRlZmF1bHRcIilcbjM2ICAgICAgICAgICAgICAgICAgICAgY2hhcmFjdGVyKDApXG4zNyAgICAgICAgICAgICAgICBwYXJzZS15YXhpcy5SIzEyOFxuMzggICAgICAgICAgICAgICAgcGFyc2UteWF4aXMuUiMxMjlcbjM5ICAgICAgICAgICAgICAgIHBhcnNlLXlheGlzLlIjMTMzXG40MCAgICAgICAgICAgICAgICBwYXJzZS15YXhpcy5SIzE0OFxuNDEgICAgICAgICAgICAgICAgcGFyc2UteWF4aXMuUiMxNTRcbjQyICAgICAgICAgICAgICAgIHBhcnNlLXlheGlzLlIjMTU4XG40MyAgICAgICAgICAgICAgICAgICAgIGNoYXJhY3RlcigwKVxuNDQgICAgICAgICAgICAgICBwYXJzZS1jYXB0aW9uLlIjMTNcbjQ1ICAgICAgICAgICAgICAgcGFyc2UtY2FwdGlvbi5SIzE2XG40NiAgICAgICAgICAgICAgIHBhcnNlLWNhcHRpb24uUiMyMVxuNDcgICAgICAgICAgICAgICBwYXJzZS1jYXB0aW9uLlIjMjFcbjQ4ICAgICAgICAgICAgICAgcGFyc2UtY2FwdGlvbi5SIzMzXG40OSAgICAgICAgICAgICAgIHBhcnNlLWNhcHRpb24uUiMzM1xuNTAgICAgICAgICAgICAgICBwYXJzZS1jYXB0aW9uLlIjMzNcbjUxICAgICAgICAgICAgICAgcGFyc2UtY2FwdGlvbi5SIzM2XG41MiAgICAgICAgICAgICAgIHBhcnNlLWNhcHRpb24uUiMzNlxuNTMgICAgICAgICAgICAgICBwYXJzZS1jYXB0aW9uLlIjMzdcbjU0ICAgICAgICAgICAgICAgcGFyc2UtY2FwdGlvbi5SIzM4XG41NSAgICAgICAgICAgICAgIHBhcnNlLWNhcHRpb24uUiMzOVxuNTYgICAgICAgICAgICAgICBwYXJzZS1jYXB0aW9uLlIjMzlcbjU3ICAgICAgICAgICAgICAgICBcImdldF90aW1lX3JhbmdlXCJcbjU4ICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiJT4lXCJcbjU5ICAgICAgICAgIGMoXCIlPiVcIiwgXCJzcGxpdF9jaGFpblwiKVxuNjAgICAgICAgICAgICAgICBjKFwiJT4lXCIsIFwibGFwcGx5XCIpXG42MSAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIiU+JVwiXG42MiAgICAgICAgICAgICAgICAgYyhcIiU+JVwiLCBcImV2YWxcIilcbjYzICAgICAgICAgIGMoXCIlPiVcIiwgXCJ3aXRoVmlzaWJsZVwiKVxuNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCIlPiVcIlxuNjUgICAgICAgICAgICAgIGMoXCJbXCIsIFwiWy5QT1NJWGN0XCIpXG42NiAgICAgICAgICAgIGMoXCJhcy5kaWZmdGltZVwiLCBcIi1cIilcbjY3ICAgICAgICAgICAgICAgICAgICBcImFzLmRpZmZ0aW1lXCJcbjY4ICAgIGMoXCJhcy5kaWZmdGltZVwiLCBcInN0cnVjdHVyZVwiKVxuNjkgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIitcIlxuNzAgICAgICAgICAgICAgICBjKFwiK1wiLCBcIisuUE9TSVh0XCIpXG43MSAgICAgICAgICAgICAgICAgICAgIGNoYXJhY3RlcigwKVxuNzIgICAgICAgICAgICAgICAgICAgICAgdXRpbHMuUiMyMDFcbjczICAgICAgICAgICAgICAgICAgICAgIHV0aWxzLlIjMjAxXG43NCAgICAgICAgICAgICAgICAgICAgICB1dGlscy5SIzIwM1xuNzUgICAgICAgICAgICAgICAgICAgICAgICAgICBcImRpZmZcIlxuNzYgICAgICAgIGMoXCJkaWZmXCIsIFwiZGlmZi5kZWZhdWx0XCIpXG43NyAgICAgICAgICAgICAgICAgICAgIGNoYXJhY3RlcigwKVxuNzggICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIipcIlxuNzkgICAgICAgICAgICAgICAgICAgICBcImRhdGEuZnJhbWVcIlxuODAgICAgICAgYyhcImRhdGEuZnJhbWVcIiwgXCJhcy5saXN0XCIpXG44MSAgICAgICAgICAgICAgICAgICAgIFwiZGF0YS5mcmFtZVwiXG44MiAgICAgICBjKFwiZGF0YS5mcmFtZVwiLCBcImFzLmxpc3RcIilcbjgzIGMoXCJkYXRhLmZyYW1lXCIsIFwiYXMuZGF0YS5mcmFtZVwiKVxuODQgICAgICAgIGMoXCJkYXRhLmZyYW1lXCIsIFwibGVuZ3RoXCIpXG44NSAgICAgICAgICAgICAgICAgICAgIFwiZGF0YS5mcmFtZVwiXG44NiBjKFwiZGF0YS5mcmFtZVwiLCBcImFzLmRhdGEuZnJhbWVcIilcbjg3ICAgICAgICBjKFwiZGF0YS5mcmFtZVwiLCBcImxlbmd0aFwiKVxuODggICAgICAgICAgICAgICAgICAgICBcImRhdGEuZnJhbWVcIlxuODkgICAgICAgIGMoXCJkYXRhLmZyYW1lXCIsIFwidW5saXN0XCIpXG45MCAgICBjKFwiZGF0YS5mcmFtZVwiLCBcIm1ha2UubmFtZXNcIilcbjkxICAgICAgICAgICAgICAgICAgICAgXCJkYXRhLmZyYW1lXCJcbjkyICAgICAgICAgICAgICAgICAgICAgY2hhcmFjdGVyKDApXG45MyAgICAgICAgICAgICAgICAgICAgICBcInN0cnVjdHVyZVwiXG45NCAgICAgYyhcInN0cnVjdHVyZVwiLCBcImF0dHJpYnV0ZXNcIilcbjk1ICAgICAgICAgICAgICAgICAgICAgY2hhcmFjdGVyKDApXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNyY1xuMSAgPEFub255bW91cz4vc3lzdGVtLmZpbGUgICAgICAgICAgICAgICBcbjIgIDxBbm9ueW1vdXM+Ly5DYWxsICAgICAgICAgICAgICAgICAgICAgXG4zICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuNCAgYXBlcm0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbjUgIGFwZXJtL2FwZXJtLmRlZmF1bHQgICAgICAgICAgICAgICAgICAgXG42ICBhcGVybSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuNyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbjggIGRldGVjdF9ncmFwaF9hcmVhL3JnYl9kaXN0ICAgICAgICAgICAgXG45ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuMTAgLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbjExICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4xMiBnZXRfbGluZV9pbmRleC9zdG9waWZub3QgICAgICAgICAgICAgIFxuMTMgZ2V0X2xpbmVfaW5kZXggICAgICAgICAgICAgICAgICAgICAgICBcbjE0IGdldF9saW5lX2luZGV4L3N0b3BpZm5vdCAgICAgICAgICAgICAgXG4xNSBnZXRfbGluZV9pbmRleC9yZ2JfZGlzdCAgICAgICAgICAgICAgIFxuMTYgZ2V0X2xpbmVfaW5kZXgvPiAgICAgICAgICAgICAgICAgICAgICBcbjE3IGdldF9saW5lX2luZGV4ICAgICAgICAgICAgICAgICAgICAgICAgXG4xOCBnZXRfbGluZV9pbmRleC9hcHBseSAgICAgICAgICAgICAgICAgIFxuMTkgZ2V0X2xpbmVfaW5kZXgvd2hpY2ggICAgICAgICAgICAgICAgICBcbjIwIGdldF9saW5lX2luZGV4L2FwcGx5ICAgICAgICAgICAgICAgICAgXG4yMSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuMjIgZ2V0X251bV9ncmlkcy9pcy5udWxsICAgICAgICAgICAgICAgICBcbjIzIGdldF9udW1fZ3JpZHMvc3RvcGlmbm90ICAgICAgICAgICAgICAgXG4yNCBnZXRfbnVtX2dyaWRzICAgICAgICAgICAgICAgICAgICAgICAgIFxuMjUgZ2V0X251bV9ncmlkcy9zdG9waWZub3QgICAgICAgICAgICAgICBcbjI2IGdldF9udW1fZ3JpZHMgICAgICAgICAgICAgICAgICAgICAgICAgXG4yNyBnZXRfbnVtX2dyaWRzL3JnYl9kaXN0ICAgICAgICAgICAgICAgIFxuMjggZ2V0X251bV9ncmlkcyAgICAgICAgICAgICAgICAgICAgICAgICBcbjI5IGdldF9udW1fZ3JpZHMvPCAgICAgICAgICAgICAgICAgICAgICAgXG4zMCBnZXRfbnVtX2dyaWRzICAgICAgICAgICAgICAgICAgICAgICAgIFxuMzEgZ2V0X251bV9ncmlkcy9hcHBseSAgICAgICAgICAgICAgICAgICBcbjMyIGdldF9udW1fZ3JpZHMgICAgICAgICAgICAgICAgICAgICAgICAgXG4zMyBnZXRfbnVtX2dyaWRzL3doaWNoICAgICAgICAgICAgICAgICAgIFxuMzQgZ2V0X251bV9ncmlkcy9kaWZmICAgICAgICAgICAgICAgICAgICBcbjM1IHNlcS9zZXEuZGVmYXVsdCAgICAgICAgICAgICAgICAgICAgICAgXG4zNiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuMzcgZ2V0X3JhbmtfcmFuZ2UgICAgICAgICAgICAgICAgICAgICAgICBcbjM4IGdldF9yYW5rX3JhbmdlL3N0b3BpZm5vdCAgICAgICAgICAgICAgXG4zOSBnZXRfcmFua19yYW5nZS8lPiUgICAgICAgICAgICAgICAgICAgIFxuNDAgZ2V0X3JhbmtfcmFuZ2Uvc3RyX3RvX251bV9yYW5rICAgICAgICBcbjQxIGdldF9yYW5rX3JhbmdlICAgICAgICAgICAgICAgICAgICAgICAgXG40MiBnZXRfcmFua19yYW5nZS9udW1fdG9fc3RyX3JhbmsgICAgICAgIFxuNDMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbjQ0IGdldF90aW1lX3JhbmdlL3N0b3BpZm5vdCAgICAgICAgICAgICAgXG40NSBnZXRfdGltZV9yYW5nZS9leHRyYWN0X2NhcHRpb25fbGV0dGVyc1xuNDYgZ2V0X3RpbWVfcmFuZ2UgICAgICAgICAgICAgICAgICAgICAgICBcbjQ3IGdldF90aW1lX3JhbmdlLyU+JSAgICAgICAgICAgICAgICAgICAgXG40OCBnZXRfdGltZV9yYW5nZSAgICAgICAgICAgICAgICAgICAgICAgIFxuNDkgZ2V0X3RpbWVfcmFuZ2UvOjogICAgICAgICAgICAgICAgICAgICBcbjUwIGdldF90aW1lX3JhbmdlLzxBbm9ueW1vdXM+ICAgICAgICAgICAgXG41MSBnZXRfdGltZV9yYW5nZS86OiAgICAgICAgICAgICAgICAgICAgIFxuNTIgZ2V0X3RpbWVfcmFuZ2UvPEFub255bW91cz4gICAgICAgICAgICBcbjUzIGdldF90aW1lX3JhbmdlICAgICAgICAgICAgICAgICAgICAgICAgXG41NCBnZXRfdGltZV9yYW5nZS9wYXN0ZSAgICAgICAgICAgICAgICAgIFxuNTUgZ2V0X3RpbWVfcmFuZ2UgICAgICAgICAgICAgICAgICAgICAgICBcbjU2IGdldF90aW1lX3JhbmdlL2FzLlBPU0lYY3QgICAgICAgICAgICAgXG41NyBnZXRfdGltZV9yYW5nZSAgICAgICAgICAgICAgICAgICAgICAgIFxuNTggJT4lICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbjU5ICU+JS9zcGxpdF9jaGFpbiAgICAgICAgICAgICAgICAgICAgICAgXG42MCAlPiUvbGFwcGx5ICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuNjEgJT4lICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbjYyICU+JS9ldmFsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG42MyAlPiUvd2l0aFZpc2libGUgICAgICAgICAgICAgICAgICAgICAgIFxuNjQgJT4lICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbjY1IFsvWy5QT1NJWGN0ICAgICAgICAgICAgICAgICAgICAgICAgICAgXG42NiBhcy5kaWZmdGltZS8tICAgICAgICAgICAgICAgICAgICAgICAgIFxuNjcgYXMuZGlmZnRpbWUgICAgICAgICAgICAgICAgICAgICAgICAgICBcbjY4IGFzLmRpZmZ0aW1lL3N0cnVjdHVyZSAgICAgICAgICAgICAgICAgXG42OSArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuNzAgKy8rLlBPU0lYdCAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbjcxICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG43MiBzdHJfdG9fbnVtX3JhbmsvOjogICAgICAgICAgICAgICAgICAgIFxuNzMgc3RyX3RvX251bV9yYW5rLzxBbm9ueW1vdXM+ICAgICAgICAgICBcbjc0IHN0cl90b19udW1fcmFuayAgICAgICAgICAgICAgICAgICAgICAgXG43NSBkaWZmICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuNzYgZGlmZi9kaWZmLmRlZmF1bHQgICAgICAgICAgICAgICAgICAgICBcbjc3ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG43OCAqICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuNzkgZGF0YS5mcmFtZSAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbjgwIGRhdGEuZnJhbWUvYXMubGlzdCAgICAgICAgICAgICAgICAgICAgXG44MSBkYXRhLmZyYW1lICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuODIgZGF0YS5mcmFtZS9hcy5saXN0ICAgICAgICAgICAgICAgICAgICBcbjgzIGRhdGEuZnJhbWUvYXMuZGF0YS5mcmFtZSAgICAgICAgICAgICAgXG44NCBkYXRhLmZyYW1lL2xlbmd0aCAgICAgICAgICAgICAgICAgICAgIFxuODUgZGF0YS5mcmFtZSAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbjg2IGRhdGEuZnJhbWUvYXMuZGF0YS5mcmFtZSAgICAgICAgICAgICAgXG44NyBkYXRhLmZyYW1lL2xlbmd0aCAgICAgICAgICAgICAgICAgICAgIFxuODggZGF0YS5mcmFtZSAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbjg5IGRhdGEuZnJhbWUvdW5saXN0ICAgICAgICAgICAgICAgICAgICAgXG45MCBkYXRhLmZyYW1lL21ha2UubmFtZXMgICAgICAgICAgICAgICAgIFxuOTEgZGF0YS5mcmFtZSAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbjkyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG45MyBzdHJ1Y3R1cmUgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuOTQgc3RydWN0dXJlL2F0dHJpYnV0ZXMgICAgICAgICAgICAgICAgICBcbjk1ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4ifQ== -->
-<pre><code>     time alloc release dups
-1   0.206 0.031   0.000   26
-2   1.180 0.989   0.000    0
-3   0.001 0.000   0.000    0
-4   0.005 0.002   0.000    1
-5   2.174 0.879   0.000    0
-6   0.001 0.000   0.000    0
-7   0.001 0.001   0.000    0
-8   0.018 0.057   0.000   36
-9   1.150 0.746   0.000    0
-10  0.001 0.001   0.000    0
-11  0.181 0.068   0.000    0
-12  0.004 0.004   0.000    4
-13  0.001 0.002   0.000    2
-14  0.004 0.019   0.000   12
-15  1.697 1.250   0.000   18
-16  0.812 0.124   2.161    0
-17  0.447 0.247   0.000    1
-18  0.827 1.127   0.000  624
-19  0.001 0.002   0.000    0
-20  2.076 3.098   0.000  625
-21  0.001 0.000   0.000    2
-22  0.001 0.001   0.000    0
-23  0.004 0.008   0.000    6
-24  0.001 0.002   0.000    6
-25  0.002 0.003   0.000    5
-26  0.001 0.002   0.000    1
-27  2.881 1.010   4.379   18
-28  0.001 0.000   0.000    0
-29  0.161 0.124   0.000    0
-30  0.001 0.001   0.000    0
-31  1.342 1.596   0.000  426
-32  0.001 0.001   0.000    0
-33  0.001 0.001   0.000    0
-34  0.003 0.006   0.000    3
-35  0.003 0.004   0.000    2
-36  0.001 0.001   0.000    0
-37  0.001 0.003   0.000    1
-38  0.003 0.012   0.000   12
-39  0.926 4.144   0.000 1413
-40  0.014 0.019   0.000    6
-41  0.001 0.002   0.000    2
-42  0.004 0.008   0.000    3
-43  0.001 0.010   0.000    1
-44  0.001 0.006   0.000   11
-45 13.025 6.836  13.531 1207
-46  0.001 0.001   0.000    0
-47  0.519 1.764   0.000  945
-48  0.001 0.002   0.000    0
-49  0.002 0.003   0.000    2
-50  0.013 0.007   0.000    1
-51  0.003 0.006   0.000    2
-52  0.007 0.011   0.000    8
-53  0.001 0.002   0.000    2
-54  0.001 0.002   0.000    0
-55  0.001 0.001   0.000    0
-56  0.008 0.017   0.000   17
-57  0.001 0.001   0.000    2
-58  0.001 0.002   0.000    0
-59  0.013 0.031   0.000   12
-60  0.002 0.003   0.000    5
-61  0.001 0.002   0.000    1
-62  0.017 0.042   0.000   37
-63  0.003 0.007   0.000    4
-64  0.001 0.002   0.000    1
-65  0.002 0.003   0.000    4
-66  0.001 0.002   0.000    0
-67  0.001 0.003   0.000    0
-68  0.002 0.005   0.000    9
-69  0.002 0.001   0.000    4
-70  0.010 0.038   0.000   25
-71  0.001 0.002   0.000    3
-72  0.002 0.004   0.000    2
-73  0.007 0.006   0.000    1
-74  0.003 0.007   0.000    3
-75  0.002 0.002   0.000    1
-76  0.001 0.002   0.000    1
-77  0.001 0.001   0.000    2
-78  0.001 0.002   0.000    0
-79  0.001 0.002   0.000    0
-80  0.001 0.002   0.000    2
-81  0.001 0.002   0.000    2
-82  0.001 0.001   0.000    1
-83  0.009 0.027   0.000   25
-84  0.001 0.001   0.000    1
-85  0.001 0.001   0.000    2
-86  0.007 0.026   0.000   21
-87  0.001 0.001   0.000    4
-88  0.002 0.003   0.000    2
-89  0.001 0.001   0.000    1
-90  0.003 0.006   0.000    2
-91  0.001 0.002   0.000    3
-92  0.002 0.005   0.000    0
-93  0.001 0.002   0.000    5
-94  0.001 0.001   0.000    3
-95  0.012 0.009   0.000    2
-                                ref
-1   c(&quot;&lt;Anonymous&gt;&quot;, &quot;system.file&quot;)
-2         c(&quot;&lt;Anonymous&gt;&quot;, &quot;.Call&quot;)
-3                      character(0)
-4                           &quot;aperm&quot;
-5       c(&quot;aperm&quot;, &quot;aperm.default&quot;)
-6                           &quot;aperm&quot;
-7                      character(0)
-8               area-detection.R#14
-9                      character(0)
-10                              &quot;-&quot;
-11                     character(0)
-12                 parse-graph.R#12
-13                 parse-graph.R#13
-14                 parse-graph.R#13
-15                 parse-graph.R#16
-16                 parse-graph.R#19
-17                 parse-graph.R#19
-18                 parse-graph.R#21
-19                 parse-graph.R#22
-20                 parse-graph.R#24
-21                     character(0)
-22                 parse-graph.R#41
-23                 parse-graph.R#42
-24                 parse-graph.R#44
-25                 parse-graph.R#44
-26                 parse-graph.R#48
-27                 parse-graph.R#48
-28                 parse-graph.R#48
-29                 parse-graph.R#48
-30                 parse-graph.R#49
-31                 parse-graph.R#49
-32                 parse-graph.R#50
-33                 parse-graph.R#50
-34                 parse-graph.R#53
-35          c(&quot;seq&quot;, &quot;seq.default&quot;)
-36                     character(0)
-37                parse-yaxis.R#128
-38                parse-yaxis.R#129
-39                parse-yaxis.R#133
-40                parse-yaxis.R#148
-41                parse-yaxis.R#154
-42                parse-yaxis.R#158
-43                     character(0)
-44               parse-caption.R#13
-45               parse-caption.R#16
-46               parse-caption.R#21
-47               parse-caption.R#21
-48               parse-caption.R#33
-49               parse-caption.R#33
-50               parse-caption.R#33
-51               parse-caption.R#36
-52               parse-caption.R#36
-53               parse-caption.R#37
-54               parse-caption.R#38
-55               parse-caption.R#39
-56               parse-caption.R#39
-57                 &quot;get_time_range&quot;
-58                            &quot;%&gt;%&quot;
-59          c(&quot;%&gt;%&quot;, &quot;split_chain&quot;)
-60               c(&quot;%&gt;%&quot;, &quot;lapply&quot;)
-61                            &quot;%&gt;%&quot;
-62                 c(&quot;%&gt;%&quot;, &quot;eval&quot;)
-63          c(&quot;%&gt;%&quot;, &quot;withVisible&quot;)
-64                            &quot;%&gt;%&quot;
-65              c(&quot;[&quot;, &quot;[.POSIXct&quot;)
-66            c(&quot;as.difftime&quot;, &quot;-&quot;)
-67                    &quot;as.difftime&quot;
-68    c(&quot;as.difftime&quot;, &quot;structure&quot;)
-69                              &quot;+&quot;
-70               c(&quot;+&quot;, &quot;+.POSIXt&quot;)
-71                     character(0)
-72                      utils.R#201
-73                      utils.R#201
-74                      utils.R#203
-75                           &quot;diff&quot;
-76        c(&quot;diff&quot;, &quot;diff.default&quot;)
-77                     character(0)
-78                              &quot;*&quot;
-79                     &quot;data.frame&quot;
-80       c(&quot;data.frame&quot;, &quot;as.list&quot;)
-81                     &quot;data.frame&quot;
-82       c(&quot;data.frame&quot;, &quot;as.list&quot;)
-83 c(&quot;data.frame&quot;, &quot;as.data.frame&quot;)
-84        c(&quot;data.frame&quot;, &quot;length&quot;)
-85                     &quot;data.frame&quot;
-86 c(&quot;data.frame&quot;, &quot;as.data.frame&quot;)
-87        c(&quot;data.frame&quot;, &quot;length&quot;)
-88                     &quot;data.frame&quot;
-89        c(&quot;data.frame&quot;, &quot;unlist&quot;)
-90    c(&quot;data.frame&quot;, &quot;make.names&quot;)
-91                     &quot;data.frame&quot;
-92                     character(0)
-93                      &quot;structure&quot;
-94     c(&quot;structure&quot;, &quot;attributes&quot;)
-95                     character(0)
+<!-- rnb-output-begin eyJkYXRhIjoiICAgIHRpbWUgYWxsb2MgcmVsZWFzZSBkdXBzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmVmXG4xICAwLjAwMSAwLjE1MyAgIDAuMDAwICAyNTAgYyhcInBuZzo6cmVhZFBOR1wiLCBcInN5c3RlbS5maWxlXCIpXG4yICAwLjAyMCAwLjg4MiAgIDAuNjU4ICAgMTcgICAgICAgYyhcInBuZzo6cmVhZFBOR1wiLCBcIi5DYWxsXCIpXG4zICAwLjAxOSAxLjAzNyAgIDAuMTExICAgIDEgICAgICBjKFwiYXBlcm1cIiwgXCJhcGVybS5kZWZhdWx0XCIpXG40ICAwLjAwMSAwLjAwMCAgIDAuMDgxICAgIDUgICAgICAgICAgICAgIGFyZWEtZGV0ZWN0aW9uLlIjMTRcbjUgIDAuMDE4IDEuNjIyICAgMC44ODMgICAzOSAgICAgICAgICAgICAgICAgICAgIGNoYXJhY3RlcigwKVxuNiAgMC4wMjIgMS4zNjggICAwLjA2NiAgIDQwICAgICAgICAgICAgICAgICBwYXJzZS1ncmFwaC5SIzE2XG43ICAwLjAwMSAwLjI0NyAgIDAuMDAwICAgIDAgICAgICAgICAgICAgICAgIHBhcnNlLWdyYXBoLlIjMTlcbjggIDAuMDAxIDAuMjYwICAgMC4wMDAgICAgMCAgICAgICAgICAgICAgICAgcGFyc2UtZ3JhcGguUiMxOVxuOSAgMC4wMDIgMC42ODEgICAwLjAwMCAgMzU3ICAgICAgICAgICAgICAgICBwYXJzZS1ncmFwaC5SIzIyXG4xMCAwLjAwMSAwLjM3OCAgIDAuMDAwICAxNDggICAgICAgICAgICAgICAgIHBhcnNlLWdyYXBoLlIjMjJcbjExIDAuMDA3IDIuNjc3ICAgMS4yNzEgIDYwMSAgICAgICAgICAgICAgICAgcGFyc2UtZ3JhcGguUiMyNVxuMTIgMC4wNDggNS41MTEgICA3LjY1MiAgIDk2ICAgICAgICAgICAgICAgICBwYXJzZS1ncmFwaC5SIzU0XG4xMyAwLjAwMiAwLjY2NCAgIDAuMDAwICAgIDkgICAgICAgICAgICAgICAgIHBhcnNlLWdyYXBoLlIjNTdcbjE0IDAuMDAxIDAuNzY4ICAgMC4wMDAgICAgMyAgICAgICAgICAgICAgICAgcGFyc2UtZ3JhcGguUiM1OVxuMTUgMC4wMDQgNC4wNTYgICAwLjAwMCAxMjY3ICAgICAgICAgICAgICAgIHBhcnNlLXlheGlzLlIjMTMzXG4xNiAwLjAwMSAwLjMzNiAgIDAuMDAwICAyOTIgICAgICAgICAgICAgICAgcGFyc2UteWF4aXMuUiMxNDhcbjE3IDAuMDAyIDIuNzkzICAgMC4wMDAgIDY3MCAgICAgICAgICAgICAgIHBhcnNlLWNhcHRpb24uUiMxNlxuMTggMC4wMDMgMi4wMDkgICA5Ljc1MyAgODk1ICAgICAgICAgICAgICAgcGFyc2UtY2FwdGlvbi5SIzIxXG4xOSAwLjAwMSAwLjAwMCAgIDAuMDAwICAxNjYgYyhcImRhdGEuZnJhbWVcIiwgXCJhcy5kYXRhLmZyYW1lXCIpXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNyY1xuMSAgcG5nOjpyZWFkUE5HL3N5c3RlbS5maWxlICAgICAgICAgICAgICBcbjIgIHBuZzo6cmVhZFBORy8uQ2FsbCAgICAgICAgICAgICAgICAgICAgXG4zICBhcGVybS9hcGVybS5kZWZhdWx0ICAgICAgICAgICAgICAgICAgIFxuNCAgZGV0ZWN0X2dyYXBoX2FyZWEvbGF6eUxvYWREQmZldGNoICAgICBcbjUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG42ICBnZXRfbGluZV9pbmRleC9yZ2JfZGlzdCAgICAgICAgICAgICAgIFxuNyAgZ2V0X2xpbmVfaW5kZXgvPiAgICAgICAgICAgICAgICAgICAgICBcbjggIGdldF9saW5lX2luZGV4ICAgICAgICAgICAgICAgICAgICAgICAgXG45ICBnZXRfbGluZV9pbmRleC86OiAgICAgICAgICAgICAgICAgICAgIFxuMTAgZ2V0X2xpbmVfaW5kZXgvbWF0cml4U3RhdHM6OmNvbE1pbnMgICBcbjExIGdldF9saW5lX2luZGV4L2FwcGx5ICAgICAgICAgICAgICAgICAgXG4xMiBnZXRfbnVtX2dyaWRzL3JnYl9kaXN0ICAgICAgICAgICAgICAgIFxuMTMgZ2V0X251bV9ncmlkcy9wbWluICAgICAgICAgICAgICAgICAgICBcbjE0IGdldF9udW1fZ3JpZHMvcm93TWVhbnMgICAgICAgICAgICAgICAgXG4xNSBnZXRfcmFua19yYW5nZS8lPiUgICAgICAgICAgICAgICAgICAgIFxuMTYgZ2V0X3JhbmtfcmFuZ2Uvc3RyX3RvX251bV9yYW5rICAgICAgICBcbjE3IGdldF90aW1lX3JhbmdlL2V4dHJhY3RfY2FwdGlvbl9sZXR0ZXJzXG4xOCBnZXRfdGltZV9yYW5nZS8lPiUgICAgICAgICAgICAgICAgICAgIFxuMTkgZGF0YS5mcmFtZS9hcy5kYXRhLmZyYW1lICAgICAgICAgICAgICBcbiJ9 -->
+<pre><code>    time alloc release dups                              ref
+1  0.001 0.153   0.000  250 c(&quot;png::readPNG&quot;, &quot;system.file&quot;)
+2  0.020 0.882   0.658   17       c(&quot;png::readPNG&quot;, &quot;.Call&quot;)
+3  0.019 1.037   0.111    1      c(&quot;aperm&quot;, &quot;aperm.default&quot;)
+4  0.001 0.000   0.081    5              area-detection.R#14
+5  0.018 1.622   0.883   39                     character(0)
+6  0.022 1.368   0.066   40                 parse-graph.R#16
+7  0.001 0.247   0.000    0                 parse-graph.R#19
+8  0.001 0.260   0.000    0                 parse-graph.R#19
+9  0.002 0.681   0.000  357                 parse-graph.R#22
+10 0.001 0.378   0.000  148                 parse-graph.R#22
+11 0.007 2.677   1.271  601                 parse-graph.R#25
+12 0.048 5.511   7.652   96                 parse-graph.R#54
+13 0.002 0.664   0.000    9                 parse-graph.R#57
+14 0.001 0.768   0.000    3                 parse-graph.R#59
+15 0.004 4.056   0.000 1267                parse-yaxis.R#133
+16 0.001 0.336   0.000  292                parse-yaxis.R#148
+17 0.002 2.793   0.000  670               parse-caption.R#16
+18 0.003 2.009   9.753  895               parse-caption.R#21
+19 0.001 0.000   0.000  166 c(&quot;data.frame&quot;, &quot;as.data.frame&quot;)
                                       src
-1  &lt;Anonymous&gt;/system.file               
-2  &lt;Anonymous&gt;/.Call                     
-3                                        
-4  aperm                                 
-5  aperm/aperm.default                   
-6  aperm                                 
-7                                        
-8  detect_graph_area/rgb_dist            
-9                                        
-10 -                                     
-11                                       
-12 get_line_index/stopifnot              
-13 get_line_index                        
-14 get_line_index/stopifnot              
-15 get_line_index/rgb_dist               
-16 get_line_index/&gt;                      
-17 get_line_index                        
-18 get_line_index/apply                  
-19 get_line_index/which                  
-20 get_line_index/apply                  
-21                                       
-22 get_num_grids/is.null                 
-23 get_num_grids/stopifnot               
-24 get_num_grids                         
-25 get_num_grids/stopifnot               
-26 get_num_grids                         
-27 get_num_grids/rgb_dist                
-28 get_num_grids                         
-29 get_num_grids/&lt;                       
-30 get_num_grids                         
-31 get_num_grids/apply                   
-32 get_num_grids                         
-33 get_num_grids/which                   
-34 get_num_grids/diff                    
-35 seq/seq.default                       
-36                                       
-37 get_rank_range                        
-38 get_rank_range/stopifnot              
-39 get_rank_range/%&gt;%                    
-40 get_rank_range/str_to_num_rank        
-41 get_rank_range                        
-42 get_rank_range/num_to_str_rank        
-43                                       
-44 get_time_range/stopifnot              
-45 get_time_range/extract_caption_letters
-46 get_time_range                        
-47 get_time_range/%&gt;%                    
-48 get_time_range                        
-49 get_time_range/::                     
-50 get_time_range/&lt;Anonymous&gt;            
-51 get_time_range/::                     
-52 get_time_range/&lt;Anonymous&gt;            
-53 get_time_range                        
-54 get_time_range/paste                  
-55 get_time_range                        
-56 get_time_range/as.POSIXct             
-57 get_time_range                        
-58 %&gt;%                                   
-59 %&gt;%/split_chain                       
-60 %&gt;%/lapply                            
-61 %&gt;%                                   
-62 %&gt;%/eval                              
-63 %&gt;%/withVisible                       
-64 %&gt;%                                   
-65 [/[.POSIXct                           
-66 as.difftime/-                         
-67 as.difftime                           
-68 as.difftime/structure                 
-69 +                                     
-70 +/+.POSIXt                            
-71                                       
-72 str_to_num_rank/::                    
-73 str_to_num_rank/&lt;Anonymous&gt;           
-74 str_to_num_rank                       
-75 diff                                  
-76 diff/diff.default                     
-77                                       
-78 *                                     
-79 data.frame                            
-80 data.frame/as.list                    
-81 data.frame                            
-82 data.frame/as.list                    
-83 data.frame/as.data.frame              
-84 data.frame/length                     
-85 data.frame                            
-86 data.frame/as.data.frame              
-87 data.frame/length                     
-88 data.frame                            
-89 data.frame/unlist                     
-90 data.frame/make.names                 
-91 data.frame                            
-92                                       
-93 structure                             
-94 structure/attributes                  
-95                                       </code></pre>
+1  png::readPNG/system.file              
+2  png::readPNG/.Call                    
+3  aperm/aperm.default                   
+4  detect_graph_area/lazyLoadDBfetch     
+5                                        
+6  get_line_index/rgb_dist               
+7  get_line_index/&gt;                      
+8  get_line_index                        
+9  get_line_index/::                     
+10 get_line_index/matrixStats::colMins   
+11 get_line_index/apply                  
+12 get_num_grids/rgb_dist                
+13 get_num_grids/pmin                    
+14 get_num_grids/rowMeans                
+15 get_rank_range/%&gt;%                    
+16 get_rank_range/str_to_num_rank        
+17 get_time_range/extract_caption_letters
+18 get_time_range/%&gt;%                    
+19 data.frame/as.data.frame              </code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>“rgb_dist” function used to be a bottleneck, which has become much faster now.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxua2dzY2hhcnQ6OjpyZ2JfZGlzdFxuYGBgXG5gYGAifQ== -->
-<p><code>r</code>r kgschart:::rgb_dist</p>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuYGBgclxua2dzY2hhcnQ6OjpyZ2JfZGlzdFxuYGBgXG5gYGBcbmBgYCJ9 -->
+<p><code>r</code>r</p>
+<pre class="r"><code>kgschart:::rgb_dist</code></pre>
 <pre><code></code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQocGFja2FnZVZlcnNpb24oJ2tnc2NoYXJ0JykpXG5gYGAifQ== -->
+<pre class="r"><code>print(packageVersion('kgschart'))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIOKAmDEuMy4y4oCZXG4ifQ== -->
+<pre><code>[1] ‘1.3.2’</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubSA8LSBtaWNyb2JlbmNobWFyayhrZ3NjaGFydChzeXN0ZW0uZmlsZShcImV4dGRhdGEvbGVlbGEtamFfSlAucG5nXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhY2thZ2UgPSBcImtnc2NoYXJ0XCIpKSxcbiAgICAgICAgICAgICAgICAgICAgdGltZXM9MjApXG5tXG5gYGAifQ== -->
+<pre class="r"><code>m &lt;- microbenchmark(kgschart(system.file(&quot;extdata/leela-ja_JP.png&quot;,
+                                         package = &quot;kgschart&quot;)),
+                    times=20)
+m</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVW5pdDogbWlsbGlzZWNvbmRzXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZXhwciAgICAgIG1pblxuIGtnc2NoYXJ0KHN5c3RlbS5maWxlKFwiZXh0ZGF0YS9sZWVsYS1qYV9KUC5wbmdcIiwgcGFja2FnZSA9IFwia2dzY2hhcnRcIikpIDE0OS4xNDU1XG4gICAgICAgbHEgICAgIG1lYW4gICBtZWRpYW4gICAgICAgdXEgICAgICBtYXggbmV2YWxcbiAxODQuMTM4MyAyMDkuMjQyNSAyMDQuMTc4NSAyMDkuODU3OSA0MzMuNTY2MyAgICAyMFxuIn0= -->
+<pre><code>Unit: milliseconds
+                                                                   expr      min
+ kgschart(system.file(&quot;extdata/leela-ja_JP.png&quot;, package = &quot;kgschart&quot;)) 149.1455
+       lq     mean   median       uq      max neval
+ 184.1383 209.2425 204.1785 209.8579 433.5663    20</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlNwZWVkIGFuYWx5c2lzIHVzaW5nIGxpbmVwcm9mIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KYGBge3J9DQpsaWJyYXJ5KGxpbmVwcm9mKQ0KbGlicmFyeShrZ3NjaGFydCkNCmwgPC0gbGluZXByb2Yoa2dzY2hhcnQoc3lzdGVtLmZpbGUoImV4dGRhdGEvbGVlbGEtamFfSlAucG5nIiwNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFja2FnZSA9ICJrZ3NjaGFydCIpKSkNCmwNCmBgYA0KDQoicmdiX2Rpc3QiIGZ1bmN0aW9uIHVzZWQgdG8gYmUgYSBib3R0bGVuZWNrLCB3aGljaCBoYXMgYmVjb21lIG11Y2ggZmFzdGVyIG5vdy4NCmBgYHtyfQ0Ka2dzY2hhcnQ6OjpyZ2JfZGlzdA0KYGBgDQoNCg0KDQoNCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiU3BlZWQgYW5hbHlzaXMgdXNpbmcgbGluZXByb2YiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCmBgYHtyfQpsaWJyYXJ5KGxpbmVwcm9mKQpsaWJyYXJ5KG1pY3JvYmVuY2htYXJrKQpsaWJyYXJ5KGtnc2NoYXJ0KQpsIDwtIGxpbmVwcm9mKGtnc2NoYXJ0KHN5c3RlbS5maWxlKCJleHRkYXRhL2xlZWxhLWphX0pQLnBuZyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFja2FnZSA9ICJrZ3NjaGFydCIpKSkKbApgYGAKCiJyZ2JfZGlzdCIgZnVuY3Rpb24gdXNlZCB0byBiZSBhIGJvdHRsZW5lY2ssIHdoaWNoIGhhcyBiZWNvbWUgbXVjaCBmYXN0ZXIgbm93LgpgYGB7cn0Ka2dzY2hhcnQ6OjpyZ2JfZGlzdApgYGAKCgpgYGB7cn0KcHJpbnQocGFja2FnZVZlcnNpb24oJ2tnc2NoYXJ0JykpCm0gPC0gbWljcm9iZW5jaG1hcmsoa2dzY2hhcnQoc3lzdGVtLmZpbGUoImV4dGRhdGEvbGVlbGEtamFfSlAucG5nIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYWNrYWdlID0gImtnc2NoYXJ0IikpLAogICAgICAgICAgICAgICAgICAgIHRpbWVzPTIwKQptCmBgYAoKCg==</div>
 
 
 
