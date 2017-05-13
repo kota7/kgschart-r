@@ -1,12 +1,12 @@
 Package: kgschart
 Type: Package
 Title: KGS Rank Graph Parser
-Version: 1.2.3
+Version: 1.2.4
 Authors@R: c(
     person("Kota", "Mori", , "kmori05@gmail.com", c("aut", "cre"))
     )
-Description: Restore underlining numeric data from KGS rank graphs (KGS 
-    <http://www.gokgs.com/> is an online platform of the game of go). 
+Description: Restore underlining numeric data from rating history graph of 
+    KGS (an online platform of the game of go, <http://www.gokgs.com/>). 
     A shiny application is also provided.
 License: MIT + file LICENSE
 URL: https://github.com/kota7/kgschart
