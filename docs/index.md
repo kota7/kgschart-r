@@ -1,7 +1,7 @@
 kgschart
 ================
 
-`kgschart` is an R package for parsing KGS rank graphs into numeric data ([KGS](http://gokgs.com/) is a online platform for the game of go). It reads pixel information of image files to recover the data behind the line plot, and identifies the horizontal and vertical axis scales by reading labels and captions. A [web application](https://kota.shinyapps.io/kgschart-app/) for using the package functionality is also published on shinyapp.io.
+`kgschart` is an R package for parsing KGS rank graphs into numeric data ([KGS](http://gokgs.com/) is an online platform for the game of go). It reads pixel information of image files to recover the data behind the line plot, and identifies the horizontal and vertical axis scales by reading labels and captions. A [web application](https://kota.shinyapps.io/kgschart-app/) for using the package functionality is also published on [shinyapp.io](shinyapp.io).
 
 Installation
 ------------
@@ -39,7 +39,7 @@ plot(x)
 
 ![](index_files/figure-markdown_github/unnamed-chunk-1-1.png)
 
-To see the source image file, set `keep_image` option. Then, the original image data is stored in the object, and can be shown by `plot` function with `image` option.
+To see the source image file, set `keep_image` option. Then, the original image data is stored in the object, which can be shown by `plot` function with `image` option.
 
 ``` r
 x <- kgschart(system.file("extdata/kotakun-en_US.png", package="kgschart"),
@@ -51,10 +51,10 @@ plot(x, image=TRUE)
 
 ### Rank graph downloader
 
-If the image file has not been downloaded yet, but the player id is known, then use `download_graph` function. It retrieves the latest graph of a specified player, and return the downloaded file path.
+If the image file has not been downloaded yet, but the player id is known, then use `download_graph` function. It retrieves the latest graph of a specified player from [KGS archives](http://www.gokgs.com/archives.jsp), and return the downloaded file path.
 
 ``` r
-f <- download_graph('Zen19L')
+f <- download_graph("Zen19L")
 y <- kgschart(f)
 plot(y)
 ```
@@ -74,3 +74,4 @@ Links
 
 -   [Web app](https://kota.shinyapps.io/kgschart-app/)
 -   [Python version](https://github.com/kota7/kgschart)
+-   [KGS](http://www.gokgs.com/)

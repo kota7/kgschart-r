@@ -5,7 +5,7 @@
 kgschart
 ========
 
-R package for parsing KGS rank graphs into numeric data
+`kgschart` is an R package for parsing KGS rank graphs into numeric data ([KGS](http://gokgs.com/) is an online platform for the game of go). See [Documentation](https://kota7.github.io/kgschart-r/) for package introduction, or visit the [web app](https://kota.shinyapps.io/kgschart-app/) to try the package functionality on the browser.
 
 Installation
 ------------
@@ -22,3 +22,4 @@ Links
 -   [Documentation](https://kota7.github.io/kgschart-r/)
 -   [Web app](https://kota.shinyapps.io/kgschart-app/)
 -   [Python version](https://github.com/kota7/kgschart)
+-   [KGS](http://www.gokgs.com/)
