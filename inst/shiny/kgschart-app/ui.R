@@ -5,8 +5,6 @@
 # http://shiny.rstudio.com
 #
 
-#if (!require(kgschart)) devtools::install_github('kota7/kgschart-r')
-#if (packageVersion('kgschart') < '1.2.2') devtools::install_github('kota7/kgschart-r')
 
 library(shiny)
 library(shinyjs)
@@ -77,7 +75,8 @@ shinyUI(fluidPage(
       shiny::hr(),
       textOutput('version_label'),
       shiny::p('Copyright \ua9 2017 by ',
-               shiny::a('Kota Mori.', href='https://github.com/kota7/'),
+               shiny::a('Kota Mori.', href='https://github.com/kota7/', 
+                        target='_blank'),
                shiny::br(),
                'All rights reserved.')
     ),

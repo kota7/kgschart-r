@@ -5,8 +5,6 @@
 # http://shiny.rstudio.com
 #
 
-#if (!require(kgschart)) devtools::install_github('kota7/kgschart-r')
-#if (packageVersion('kgschart') < '1.2.2') devtools::install_github('kota7/kgschart-r')
 
 
 library(shiny)
