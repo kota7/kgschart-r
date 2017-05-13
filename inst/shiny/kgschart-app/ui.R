@@ -60,7 +60,13 @@ shinyUI(fluidPage(
       shiny::hr(),
       shiny::a('Bug Report',
         href='https://github.com/kota7/kgschart-r/issues',
-        target='_blank')
+        target='_blank'),
+
+      shiny::hr(),
+      shiny::p('\ua9 2017 by ',
+               shiny::a('Kota Mori.', href='https://github.com/kota7/'),
+               #shiny::br(),
+               'All rights reserved.')
     ),
 
 
