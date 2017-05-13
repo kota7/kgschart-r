@@ -10,11 +10,12 @@
 
 
 library(shiny)
+library(shinyjs)
 library(kgschart)
 
 
 shinyServer(function(input, output) {
-
+  disable('dl_btn')
 
   RV <- reactiveValues(
     object = NULL, # store parsed object here
@@ -85,6 +86,8 @@ shinyServer(function(input, output) {
       if (is.null(rr) || length(rr) != 2) return("N/A")
       sprintf("%s ~ %s", rr[1], rr[2])
     })
+
+    enable('dl_btn')
   })
 
 
