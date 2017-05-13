@@ -63,9 +63,9 @@ shinyUI(fluidPage(
         target='_blank'),
 
       shiny::hr(),
-      shiny::p('\ua9 2017 by ',
+      shiny::p('Copyright \ua9 2017 by ',
                shiny::a('Kota Mori.', href='https://github.com/kota7/'),
-               #shiny::br(),
+               shiny::br(),
                'All rights reserved.')
     ),
 
