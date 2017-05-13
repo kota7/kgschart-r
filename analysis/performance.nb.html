@@ -241,16 +241,24 @@ l</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubVxuXG5gYGAifQ== -->
-<pre class="r"><code>m
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQocGFja2FnZVZlcnNpb24oJ2tnc2NoYXJ0JykpXG5gYGAifQ== -->
+<pre class="r"><code>print(packageVersion('kgschart'))</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiVW5pdDogbWlsbGlzZWNvbmRzXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZXhwciAgICAgbWluXG4ga2dzY2hhcnQoc3lzdGVtLmZpbGUoXCJleHRkYXRhL2xlZWxhLWphX0pQLnBuZ1wiLCBwYWNrYWdlID0gXCJrZ3NjaGFydFwiKSkgMjA1LjkwMVxuICAgICAgIGxxICAgICBtZWFuICAgbWVkaWFuICAgICAgIHVxICAgICAgbWF4IG5ldmFsXG4gMjExLjI4OTQgMjQzLjc1OTYgMjYwLjYzNTIgMjY1LjU3MzggMjcxLjM3OTEgICAgMjBcbiJ9 -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIOKAmDEuMy4y4oCZXG4ifQ== -->
+<pre><code>[1] ‘1.3.2’</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubSA8LSBtaWNyb2JlbmNobWFyayhrZ3NjaGFydChzeXN0ZW0uZmlsZShcImV4dGRhdGEvbGVlbGEtamFfSlAucG5nXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhY2thZ2UgPSBcImtnc2NoYXJ0XCIpKSxcbiAgICAgICAgICAgICAgICAgICAgdGltZXM9MjApXG5tXG5gYGAifQ== -->
+<pre class="r"><code>m &lt;- microbenchmark(kgschart(system.file(&quot;extdata/leela-ja_JP.png&quot;,
+                                         package = &quot;kgschart&quot;)),
+                    times=20)
+m</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVW5pdDogbWlsbGlzZWNvbmRzXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZXhwciAgICAgIG1pblxuIGtnc2NoYXJ0KHN5c3RlbS5maWxlKFwiZXh0ZGF0YS9sZWVsYS1qYV9KUC5wbmdcIiwgcGFja2FnZSA9IFwia2dzY2hhcnRcIikpIDE0OS4xNDU1XG4gICAgICAgbHEgICAgIG1lYW4gICBtZWRpYW4gICAgICAgdXEgICAgICBtYXggbmV2YWxcbiAxODQuMTM4MyAyMDkuMjQyNSAyMDQuMTc4NSAyMDkuODU3OSA0MzMuNTY2MyAgICAyMFxuIn0= -->
 <pre><code>Unit: milliseconds
-                                                                   expr     min
- kgschart(system.file(&quot;extdata/leela-ja_JP.png&quot;, package = &quot;kgschart&quot;)) 205.901
+                                                                   expr      min
+ kgschart(system.file(&quot;extdata/leela-ja_JP.png&quot;, package = &quot;kgschart&quot;)) 149.1455
        lq     mean   median       uq      max neval
- 211.2894 243.7596 260.6352 265.5738 271.3791    20</code></pre>
+ 184.1383 209.2425 204.1785 209.8579 433.5663    20</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->

@@ -24,6 +24,7 @@ get_line_index <- function(x)
 
   out <- apply(t(dist_green) == min_dist, MARGIN=1,
                FUN=function(a) mean(which(a)))
+
   out[no_line] <- NA_real_
   out
 }
