@@ -39,7 +39,8 @@ shinyUI(fluidPage(
                 accept=c('image/png')),
 
       div(style="display: inline-block; vertical-align:middle",
-          textInput('input_id', 'Or type in a player name')),
+          textInput('input_id', 'Or type in a player name',
+                    placeholder='CrazyStone')),
       div(style="display: inline-block;vertical-align:middle; width:10px",
           shiny::br()),
       div(style="display: inline-block; vertical-align:-30%;",
