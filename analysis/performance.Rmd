@@ -5,6 +5,7 @@ output: html_notebook
 
 ```{r}
 library(lineprof)
+library(microbenchmark)
 library(kgschart)
 l <- lineprof(kgschart(system.file("extdata/leela-ja_JP.png",
                                    package = "kgschart")))
@@ -17,5 +18,12 @@ kgschart:::rgb_dist
 ```
 
 
+```{r}
+print(packageVersion('kgschart'))
+m <- microbenchmark(kgschart(system.file("extdata/leela-ja_JP.png",
+                                         package = "kgschart")),
+                    times=20)
+m
+```
 
 

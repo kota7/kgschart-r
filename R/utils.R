@@ -106,7 +106,10 @@ to_gray <- function(arr, white, black)
   arr <- arr * weights
 
   denom <- as.numeric(crossprod(black - white))
-  out <- apply(arr - black, MARGIN=c(2,3), FUN=crossprod, y=white - black)
+  # old ver. maybe slightly slower?
+  #out <- apply(arr - black, MARGIN=c(2,3), FUN=crossprod, y=white - black)
+  tmp <- (arr-black) * (white-black)
+  out <- tmp[1,,] + tmp[2,,] + tmp[3,,]
   out/denom
 }
 
