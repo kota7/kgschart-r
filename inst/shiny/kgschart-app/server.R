@@ -17,6 +17,12 @@ library(kgschart)
 shinyServer(function(input, output) {
   disable('dl_btn')
 
+  output$version_label <- renderText({
+    # version equals the package version
+    # this is useful to check the deployment
+    paste('Version', packageVersion('kgschart'))
+  })
+
   RV <- reactiveValues(
     object = NULL, # store parsed object here
     id = ''

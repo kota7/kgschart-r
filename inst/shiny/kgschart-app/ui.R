@@ -10,6 +10,8 @@
 
 library(shiny)
 library(shinyjs)
+library(kgschart)
+
 
 shinyUI(fluidPage(
 
@@ -72,6 +74,7 @@ shinyUI(fluidPage(
 
 
       shiny::hr(),
+      textOutput('version_label'),
       shiny::p('Copyright \ua9 2017 by ',
                shiny::a('Kota Mori.', href='https://github.com/kota7/'),
                shiny::br(),
