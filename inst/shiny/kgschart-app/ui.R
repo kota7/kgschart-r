@@ -33,12 +33,10 @@ shinyUI(fluidPage(
   # Sidebar with a slider input for number of bins
   sidebarLayout(
     sidebarPanel(
-      fileInput('input_file', 'Choose an image file (PNG format)',
-                accept=c('image/png')),
+      fileInput('input_file', 'Choose an image file (PNG format)', accept=c('image/png')),
 
       div(style="display: inline-block; vertical-align:middle",
-          textInput('input_id', 'Or type in a player name',
-                    placeholder='CrazyStone')),
+          textInput('input_id', 'Or type in a player name', placeholder="CrazyStone")),
       div(style="display: inline-block;vertical-align:middle; width:10px",
           shiny::br()),
       div(style="display: inline-block; vertical-align:-30%;",
@@ -75,7 +73,7 @@ shinyUI(fluidPage(
       shiny::hr(),
       textOutput('version_label'),
       shiny::p('Copyright \ua9 2017 by ',
-               shiny::a('Kota Mori.', href='https://github.com/kota7/', 
+               shiny::a('Kota Mori.', href='https://github.com/kota7/',
                         target='_blank'),
                shiny::br(),
                'All rights reserved.')
