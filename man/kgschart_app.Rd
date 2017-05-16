@@ -16,4 +16,3 @@ Start "KGS Rank Graph Parser" applicaiton.
 \dontrun{
 kgschart_app()}
 }
-

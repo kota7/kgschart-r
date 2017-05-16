@@ -25,4 +25,3 @@ component. Useful for debugging.}
 \description{
 Plot data or image
 }
-

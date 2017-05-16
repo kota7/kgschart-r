@@ -43,4 +43,3 @@ rasterImage(p,0,0,1,1)}
 \seealso{
 \code{\link[utils]{download.file}}
 }
-

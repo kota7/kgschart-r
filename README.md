@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Build Status](https://travis-ci.org/kota7/kgschart-r.svg?branch=master)](https://travis-ci.org/kota7/kgschart-r)
+[![Build Status](https://travis-ci.org/kota7/kgschart-r.svg?branch=master)](https://travis-ci.org/kota7/kgschart-r) [![CRAN Status](http://www.r-pkg.org/badges/version/kgschart)](http://www.r-pkg.org/badges/version/kgschart)
 
 kgschart
 ========
@@ -10,7 +10,13 @@ kgschart
 Installation
 ------------
 
-This package is not on CRAN yet. Install it from the GitHub repository.
+This package is now on CRAN. You can download by:
+
+``` r
+install.packages("kgschart")
+```
+
+Alternatively, you can download the latest version from the GitHub repository.
 
 ``` r
 devtools::install_github("kota7/kgschart-r")

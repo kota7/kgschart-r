@@ -26,4 +26,3 @@ head(x$data)
 \dontrun{
 plot(x)}
 }
-
