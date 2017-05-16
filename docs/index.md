@@ -1,6 +1,8 @@
 kgschart
 ================
 
+[![Build Status](https://travis-ci.org/kota7/kgschart-r.svg?branch=master)](https://travis-ci.org/kota7/kgschart-r) [![CRAN Status](http://www.r-pkg.org/badges/version/kgschart)](http://www.r-pkg.org/badges/version/kgschart) [![](http://cranlogs.r-pkg.org/badges/kgschart)](http://cran.rstudio.com/web/packages/kgschart/index.html)
+
 `kgschart` is an R package for parsing KGS rank graphs into numeric data ([KGS](http://gokgs.com/) is an online platform for the game of go). It reads pixel information of image files to recover the data behind the line plot, and identifies the horizontal and vertical axis scales by reading labels and captions. A [web application](https://kota.shinyapps.io/kgschart-app/) for using the package functionality is also published on [shinyapp.io](shinyapp.io).
 
 Installation
