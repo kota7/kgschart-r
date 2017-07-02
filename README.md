@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Build Status](https://travis-ci.org/kota7/kgschart-r.svg?branch=master)](https://travis-ci.org/kota7/kgschart-r) [![CRAN Status](http://www.r-pkg.org/badges/version/kgschart)](http://www.r-pkg.org/badges/version/kgschart) [![](http://cranlogs.r-pkg.org/badges/kgschart)](http://cran.rstudio.com/web/packages/kgschart/index.html)
+[![Build Status](https://travis-ci.org/kota7/kgschart-r.svg?branch=master)](https://travis-ci.org/kota7/kgschart-r) [![CRAN Status](https://www.r-pkg.org/badges/version/kgschart)](https://www.r-pkg.org/badges/version/kgschart) [![](http://cranlogs.r-pkg.org/badges/kgschart)](https://cran.r-project.org/package=kgschart)
 
 kgschart
 ========
