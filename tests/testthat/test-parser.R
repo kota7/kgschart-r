@@ -9,8 +9,10 @@ library(jsonlite)
 context('identification of rank and time range')
 
 test_that('rank and time range', {
-  x <- fromJSON('answers.json')
+  x <- NULL
+  for (fn in dir(".", "\\.json$")) x <- rbind(x, fromJSON(fn))
   x <- x[order(x$file),]
+
   for (i in 1:nrow(x))
   {
     o <- kgschart(x$file[i])
