@@ -53,7 +53,7 @@ get_time_range <- function(x)
     paste0(collapse='')
 
   tmp <- stringr::str_match_all(
-    cap, '([A-Z0][A-Za-z0-9]{2})([0-9]{1,2}),([0-9]{4})')[[1]]
+    cap, '([A-Z05][A-Za-z0-9]{2})([0-9]{1,2}),([0-9]{4})')[[1]]
   if (nrow(tmp) >= 2) {
     tmp <- utils::tail(tmp, 2)
     yr <- as.integer(tmp[,4])
